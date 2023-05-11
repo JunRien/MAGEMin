@@ -155,6 +155,9 @@ bulk_info retrieve_bulk_PT(				global_variable      gv,
 		else if (gv.EM_database == 2){
 			printf("  - Database                  : Igneous (Holland et al., 2018)\n"	);
 		}
+		else if (gv.EM_database == 4){
+			printf("  - Database                  : Ultramafic (Evans & Frost, 2021)\n"	);
+		}
 
 		if (strcmp( gv.sys_in, "mol") == 0){	
 			printf("  - input system composition  : mol fraction\n"	);

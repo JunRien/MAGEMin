@@ -9,11 +9,11 @@ ifeq ($(UNAME_S),Darwin)
 	
 	# These are the flags to be used if you followed the instructions on the webpage and installed MPICH and NLopt all through homebrew 
 	# Note that we use the apple Accelerate framework to call Lapack routines
-	LIBS    = -lm -framework Accelerate /opt/homebrew/lib/libnlopt.dylib /opt/homebrew/lib/libmpi.dylib
-	INC     = -I/opt/homebrew/include 
+    #LIBS    = -lm -framework Accelerate /opt/homebrew/lib/libnlopt.dylib /opt/homebrew/lib/libmpi.dylib
+    #INC     = -I/opt/homebrew/include 
 
-	#LIBS   = -lm -framework Accelerate /usr/local/opt/lapack/lib/liblapacke.dylib /usr/local/lib/libnlopt.dylib /usr/local/lib/libmpich.dylib
-	#INC    = -I/usr/local/opt/lapack/include -I/usr/local/include
+	LIBS   = -lm -framework Accelerate /usr/local/opt/lapack/lib/liblapacke.dylib /usr/local/lib/libnlopt.dylib /usr/local/lib/libmpich.dylib
+	INC    = -I/usr/local/opt/lapack/include -I/usr/local/include
 
 	# This is for a Mac, where we employ the build-in CBLAS and LAPACKE from MacPorts
 	# LIBS    = -lm -framework Accelerate /opt/local/lib/lapack/liblapacke.dylib /usr/local/lib/libnlopt.dylib ~/Software/mpich-3.3.2/mpich-install/lib/libmpich.dylib

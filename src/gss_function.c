@@ -4029,7 +4029,7 @@ SS_ref G_SS_ev_fluid_function(SS_ref SS_ref_db, int EM_database, int len_ox, bul
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 0.01-eps;
 
     return SS_ref_db;
 }
@@ -4081,7 +4081,7 @@ SS_ref G_SS_ev_ol_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4138,7 +4138,7 @@ SS_ref G_SS_ev_br_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4198,7 +4198,7 @@ SS_ref G_SS_ev_ch_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4300,7 +4300,10 @@ SS_ref G_SS_ev_atg_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[1][0] = 0.0+eps;  SS_ref_db.bounds_ref[1][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[2][0] = 0.0+eps;  SS_ref_db.bounds_ref[2][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[3][0] = -1.0+eps;  SS_ref_db.bounds_ref[3][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4353,6 +4356,7 @@ SS_ref G_SS_ev_g_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_in
     };
     
     //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4462,7 +4466,11 @@ SS_ref G_SS_ev_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[1][0] = 0.0+eps;  SS_ref_db.bounds_ref[1][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[2][0] = 0.0+eps;  SS_ref_db.bounds_ref[2][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[3][0] = 0.0+eps;  SS_ref_db.bounds_ref[3][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[4][0] = -1.0+eps;  SS_ref_db.bounds_ref[4][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4599,7 +4607,13 @@ SS_ref G_SS_ev_chl_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[1][0] = 0.0+eps;  SS_ref_db.bounds_ref[1][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[2][0] = 0.0+eps;  SS_ref_db.bounds_ref[2][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[3][0] = 0.0+eps;  SS_ref_db.bounds_ref[3][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[4][0] = 0.0+eps;  SS_ref_db.bounds_ref[4][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[5][0] = -1.0+eps;  SS_ref_db.bounds_ref[5][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[6][0] = -1.0+eps;  SS_ref_db.bounds_ref[6][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4737,7 +4751,13 @@ SS_ref G_SS_ev_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[1][0] = 0.0+eps;  SS_ref_db.bounds_ref[1][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[2][0] = 0.0+eps;  SS_ref_db.bounds_ref[2][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[3][0] = 0.0+eps;  SS_ref_db.bounds_ref[3][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[4][0] = 0.0+eps;  SS_ref_db.bounds_ref[4][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[5][0] = -1.0+eps;  SS_ref_db.bounds_ref[5][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[6][0] = -1.0+eps;  SS_ref_db.bounds_ref[6][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4802,7 +4822,8 @@ SS_ref G_SS_ev_spi_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[1][0] = 0.0+eps;  SS_ref_db.bounds_ref[1][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4896,7 +4917,10 @@ SS_ref G_SS_ev_opx_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[1][0] = 0.0+eps;  SS_ref_db.bounds_ref[1][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[2][0] = 0.0+eps;  SS_ref_db.bounds_ref[2][1] = 1.0-eps;
+    SS_ref_db.bounds_ref[3][0] = 0.0+eps;  SS_ref_db.bounds_ref[3][1] = 1.0-eps;
 
     return SS_ref_db;
 }
@@ -4945,7 +4969,7 @@ SS_ref G_SS_ev_po_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    SS_ref_db.bounds_ref[0][0] = 0.0+eps;  SS_ref_db.bounds_ref[0][1] = 1.0-eps;
 
     return SS_ref_db;
 }

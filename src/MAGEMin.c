@@ -907,6 +907,9 @@ global_variable ReadCommandLineOptions(	global_variable 	 gv,
 	else if (strcmp(gv.db, "ig") == 0){
 		gv.EM_database = 2;
 	}
+	else if (strcmp(gv.db, "ev") == 0){
+		gv.EM_database = 4;
+	}
 	else {
 		printf(" No or wrong database acronym has been provided, using default (Igneous [ig])\n");
 		gv.EM_database = 2;

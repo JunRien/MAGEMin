@@ -4622,7 +4622,7 @@ SS_ref NLopt_opt_function(		global_variable   gv,
       printf("\nsolid solution '%s index %d' is not in the database\n",gv.SS_list[index], index);	
       }	
   }
-  else if (gv.EM_database == 3){
+  else if (gv.EM_database == 4){
       if (strcmp( gv.SS_list[index], "fluid")  == 0){
          SS_ref_db  = NLopt_opt_ev_fluid_function( gv, SS_ref_db);}
       else if (strcmp( gv.SS_list[index], "ol")  == 0){

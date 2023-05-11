@@ -5582,7 +5582,7 @@ SS_ref P2X(					global_variable 	 gv,
 			printf("\nsolid solution '%s' is not in the database\n",name);		
 		}	
 	}
-	else if(gv.EM_database == 3){
+	else if(gv.EM_database == 4){
 		if 	(strcmp( name, "fluid") == 0 ){
 			p2x_ev_fluid(&SS_ref_db, eps);	
 		}
@@ -5739,7 +5739,7 @@ SS_ref PC_function(		global_variable 	 gv,
 			printf("\nsolid solution '%s' is not in the database\n",name);		
 		}	
 	}
-	else if(gv.EM_database == 3){
+	else if(gv.EM_database == 4){
 		if 	(strcmp( name, "fluid") == 0 ){
 			G0 = obj_ev_fluid(SS_ref_db.n_xeos, SS_ref_db.iguess, 	SS_ref_db.dfx, &SS_ref_db);
 		}
