@@ -1343,7 +1343,6 @@ void p2x_ev_spi(void *SS_ref_db, double eps){
     
     d->iguess[1]  = d->p[0]+d->p[1];
     d->iguess[0]  = d->iguess[1] - d->p[1] + d->p[2];
-    0;
     
     for (int i = 0; i < d->n_xeos; i++){
         if (d->iguess[i] < d->bounds[i][0]){

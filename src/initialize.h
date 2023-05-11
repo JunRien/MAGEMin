@@ -213,7 +213,7 @@ global_variable global_variable_alloc( bulk_info  *z_b ){
 /** 
 	Evans&Frost,2021 database informations
 **/
-typedef struct ev_datasets {
+typedef struct ultramafic_datasets {
 	int 	n_em_db;
 	int 	n_ox;
 	int 	n_pp;
@@ -240,20 +240,20 @@ typedef struct ev_datasets {
 
 	double  obj_tol;
 
-} ev_dataset;
+} ultramafic_dataset;
 
-ev_dataset ev_db = {
+ultramafic_dataset ultramafic_db = {
 	256,						/* number of endmembers */
-	11,							/* number of oxides */			
+	7,							/* number of oxides */			
 	15,							/* number of pure phases */
 	12,							/* number of solution phases */
-	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"K2O"	,"Na2O"	,"TiO2"	,"O"	,"MnO"	,"H2O"						},
+	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"O"	,"H2O"						},
 	{"q"	,"crst"	,"trd"	,"coe"	,"stv"	,"ky"	,"sill"	,"and"	,"ru"	,"sph"	,"wo"	,"pswo"	,"ne"	,"O2"  ,"H2O"				},//!!!!!!have to check pure endmerber for ultramafic comp
-	{"fluid","ol"   ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"		},
+	{"fluid", "ol"   ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"		},
 	
-	{1	,1	,1	,1	,1	,1	,1	,1	,1 	,1 	,1 	,1 		},  // allow solvus?
+	{1		,1		,1		,1		,1		,1		,1		,1		,1 		,1 		,1 		,1 		},  // allow solvus?
 	{11  	,10  	,10 	,10 	,489 	,10  	,985 	,2425	,3136	,100	,196	,10		},  // No. of pseudocompound
-	{0.001	,0.1	,0.1	,0.1	,0.19	,0.1	,0.19	,0.249	,0.249	,0.1	,0.19	,0.1		},  // discretization step
+	{0.001	,0.1	,0.1	,0.1	,0.19	,0.1	,0.19	,0.249	,0.249	,0.1	,0.19	,0.1	},  // discretization step
 
 	2.0, 						/* max dG under which a phase is considered to be reintroduced  					*/
 	473.15,						/* max temperature above which PGE solver is active 								*/
