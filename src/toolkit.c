@@ -4,14 +4,7 @@
 #include <time.h>
 #include <string.h>
 #include <complex.h> 
-#if __APPLE__
-	/* dgetrf & dgetri routines */
-	extern void dgetrf( int* M, int* N, double* A, int* lda, int* ipiv, int* info);
-	extern void dgetri( int* N, double* A, int* lda, int* ipiv, double* work, int* lwork, int* info);
-#else
-	#include <lapacke.h> 
-#endif 
-
+#include <lapacke.h> 
 #include "MAGEMin.h"
 
 #include "gem_function.h"
@@ -606,15 +599,8 @@ void inverseMatrix(int *ipiv, double *A1, int n, double *work, int lwork){
 	int    info;
 
 	/* call lapacke to inverse Matrix */
-	#if __APPLE__	
-			dgetrf(&n, &n, A1, &n, ipiv, &info); 
-			dgetri(&n, A1, &n, ipiv, work, &lwork, &info);
-
-	#else
-		info = LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, A1, n, ipiv); 
-		info = LAPACKE_dgetri_work(LAPACK_ROW_MAJOR, n, A1, n, ipiv, work, lwork);
-	#endif 
-
+	info = LAPACKE_dgetrf(LAPACK_ROW_MAJOR, n, n, A1, n, ipiv); 
+	info = LAPACKE_dgetri_work(LAPACK_ROW_MAJOR, n, A1, n, ipiv, work, lwork);
 };
 
 /**

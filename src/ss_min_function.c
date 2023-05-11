@@ -8,6 +8,7 @@ Function to call solution phase Minimization
 #include <time.h>
 #include <string.h>
 #include <complex.h> 
+#include <lapacke.h> 
 
 #include "mpi.h"
 #include "nlopt.h"

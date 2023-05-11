@@ -125,7 +125,7 @@ global_variable global_variable_alloc( bulk_info  *z_b ){
 	}
 
 	strcpy(gv.outpath,"./output/");				/** define the outpath to save logs and final results file	 						*/
-	strcpy(gv.version,"1.3.1 [03/04/2023]");	/** MAGEMin version 																*/
+	strcpy(gv.version,"1.3.0 [06/03/2023]");	/** MAGEMin version 																*/
 
 	/* generate parameters        		*/
 	gv.max_n_cp 		= 128;					/** number of considered solution phases 											*/									
@@ -211,6 +211,66 @@ global_variable global_variable_alloc( bulk_info  *z_b ){
 
 
 /** 
+	Evans&Frost,2021 database informations
+**/
+typedef struct ev_datasets {
+	int 	n_em_db;
+	int 	n_ox;
+	int 	n_pp;
+	int 	n_ss;
+	char    ox[11][20];
+	char    PP[15][20];
+	char    SS[12][20];
+
+	int 	verifyPC[12];
+	int 	n_SS_PC[12];
+	double 	SS_PC_stp[12];
+
+	double 	PC_df_add;					/** min value of df under which the PC is added 									*/
+	double  solver_switch_T;
+	double  min_melt_T;
+
+	double  inner_PGE_ite;				/** number of inner PGE iterations, this has to be made mass or dG dependent 		*/
+	double  max_n_phase;				/** maximum mol% phase change during one PGE iteration in wt% 						*/
+	double  max_g_phase;				/** maximum delta_G of reference change during PGE 									*/
+	double 	max_fac;					/** maximum update factor during PGE under-relax < 0.0, over-relax > 0.0 	 		*/
+
+	double  merge_value;				/** max norm distance between two instances of a solution phase						*/	
+	double 	re_in_n;					/** fraction of phase when being reintroduce.  										*/
+
+	double  obj_tol;
+
+} ev_dataset;
+
+ev_dataset ev_db = {
+	256,						/* number of endmembers */
+	11,							/* number of oxides */			
+	15,							/* number of pure phases */
+	12,							/* number of solution phases */
+	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"K2O"	,"Na2O"	,"TiO2"	,"O"	,"MnO"	,"H2O"						},
+	{"q"	,"crst"	,"trd"	,"coe"	,"stv"	,"ky"	,"sill"	,"and"	,"ru"	,"sph"	,"wo"	,"pswo"	,"ne"	,"O2"  ,"H2O"				},//!!!!!!have to check pure endmerber for ultramafic comp
+	{"fluid","ol"   ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"		},
+	
+	{1	,1	,1	,1	,1	,1	,1	,1	,1 	,1 	,1 	,1 		},  // allow solvus?
+	{11  	,10  	,10 	,10 	,489 	,10  	,985 	,2425	,3136	,100	,196	,10		},  // No. of pseudocompound
+	{0.001	,0.1	,0.1	,0.1	,0.19	,0.1	,0.19	,0.249	,0.249	,0.1	,0.19	,0.1		},  // discretization step
+
+	2.0, 						/* max dG under which a phase is considered to be reintroduced  					*/
+	473.15,						/* max temperature above which PGE solver is active 								*/
+	873.15,						/** minimum temperature above which melt is considered 								*/
+
+	2,							/** number of inner PGE iterations, this has to be made mass or dG dependent 		*/
+	0.05,						/** maximum mol% phase change during one PGE iteration in wt% 						*/
+	2.5,						/** maximum delta_G of reference change during PGE 									*/
+	1.0,						/** maximum update factor during PGE under-relax < 0.0, over-relax > 0.0 	 		*/
+
+	1e-1,						/** merge instances of solution phase if norm < val 								*/
+	1e-4,						/** fraction of solution phase when re-introduced 									*/
+	1e-7						/** objective function tolerance 				 									*/
+};
+
+
+/** 
 	Metapelite database informations
 **/
 typedef struct metapelite_datasets {
@@ -220,11 +280,11 @@ typedef struct metapelite_datasets {
 	int 	n_ss;
 	char    ox[11][20];
 	char    PP[15][20];
-	char    SS[16][20];
+	char    SS[17][20];
 
-	int 	verifyPC[16];
-	int 	n_SS_PC[16];
-	double 	SS_PC_stp[16];
+	int 	verifyPC[17];
+	int 	n_SS_PC[17];
+	double 	SS_PC_stp[17];
 
 	double 	PC_df_add;					/** min value of df under which the PC is added 									*/
 	double  solver_switch_T;
@@ -246,14 +306,14 @@ metapelite_dataset metapelite_db = {
 	256,						/* number of endmembers */
 	11,							/* number of oxides */			
 	15,							/* number of pure phases */
-	16,							/* number of solution phases */
+	17,							/* number of solution phases */
 	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"K2O"	,"Na2O"	,"TiO2"	,"O"	,"MnO"	,"H2O"												},
 	{"q"	,"crst"	,"trd"	,"coe"	,"stv"	,"ky"	,"sill"	,"and"	,"ru"	,"sph"	,"wo"	,"pswo"	,"ne"	,"O2"  ,"H2O"				},
-	{"liq"	,"pl4tr","bi"	,"g"	,"ep"	,"ma"	,"mu"	,"opx"	,"sa"	,"cd"	,"st"	,"chl"	,"ctd"	,"sp"  ,"ilm"  ,"mt"		},
+	{"liq"	,"pl4tr","bi"	,"g"	,"ep"	,"ma"	,"mu"	,"opx"	,"sa"	,"cd"	,"st"	,"chl"	,"ctd"	,"sp"  ,"ilm"  ,"mt","talc"		},
 	
-	{1		,1		,1		,1		,1		,1		,1		,1		,1 		,1 		,1 		,1 		,1 		,1 		,1 		,1			},  // allow solvus?
-	{2450	,231 	,981	,756	,110 	,1875	,1875	,1277	,230	,216	,540	,2270	,216	,405 	,140 	,27			},  // # of pseudocompound
-	{0.249	,0.049	,0.19	,0.19	,0.049	,0.19	,0.19	,0.249	,0.19	,0.19	,0.19	,0.249	,0.19	,0.124 	,0.19 	,0.19 		},  // discretization step
+	{1		,1		,1		,1		,1		,1		,1		,1		,1 		,1 		,1 		,1 		,1 		,1 		,1 		,1	,1			},  // allow solvus?
+	{2450	,231 	,981	,756	,110 	,1875	,1875	,1277	,230	,216	,540	,2270	,216	,405 	,140 	,27 ,972			},  // # of pseudocompound
+	{0.249	,0.049	,0.19	,0.19	,0.049	,0.19	,0.19	,0.249	,0.19	,0.19	,0.19	,0.249	,0.19	,0.124 	,0.19 	,0.19,0.19 		},  // discretization step
 
 	2.0, 						/* max dG under which a phase is considered to be reintroduced  					*/
 	473.15,						/* max temperature above which PGE solver is active 								*/
@@ -975,14 +1035,14 @@ bulk_info reset_z_b_bulk(			global_variable 	 gv,
 		}
 	}
 
-	/** calculate fbc to be used for normalization factor of solution phases */
+	/** calculate fbc to be used for normalization factor of liq */
 	z_b.fbc			= 0.0; 
 	for (i = 0; i < gv.len_ox; i++){
 		z_b.fbc += z_b.bulk_rock[i]*z_b.apo[i];
 	}
 	
-	z_b.nzEl_val = sum;						/** store number of non zero values */
-	z_b.zEl_val  = gv.len_ox - sum;			/** store number of zero values 	*/
+	z_b.nzEl_val = sum;					/** store number of non zero values */
+	z_b.zEl_val  = gv.len_ox - sum;			/** store number of zero values */
 	
 	z_b.nzEl_array  = malloc (z_b.nzEl_val * sizeof (int) ); 
 	if (z_b.zEl_val > 0){

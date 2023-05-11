@@ -4029,7 +4029,7 @@ SS_ref G_SS_ev_fluid_function(SS_ref SS_ref_db, int EM_database, int len_ox, bul
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4081,7 +4081,7 @@ SS_ref G_SS_ev_ol_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4138,7 +4138,7 @@ SS_ref G_SS_ev_br_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4198,7 +4198,7 @@ SS_ref G_SS_ev_ch_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4277,30 +4277,30 @@ SS_ref G_SS_ev_atg_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
     										"equilibrium"	);
     
     SS_ref_db.gbase[0] 		= atg_eq.gb/16;
-    SS_ref_db.gbase[1] 		= atg_eq.gb/16 + fta_eq.gb - ta_eq.gb - 28;
-    SS_ref_db.gbase[2] 		= atg_eq.gb/16 + fta_eq.gb/3 - ta_eq.gb/3 - 11.33;
-    SS_ref_db.gbase[3] 		= atg_eq.gb/16 - ta_eq.gb + tats_eq.gb - 36;
-    SS_ref_db.gbase[4] 		= andr_eq.gb/2 + atg_eq.gb/16 - gr_eq.gb/2 - ta_eq.gb + tats_eq.gb - 5;
+    SS_ref_db.gbase[1] 		= atg_eq.gb/16 + fta_eq.gb_eq.gb - ta_eq.gb - 28;
+    SS_ref_db.gbase[2] 		= atg_eq.gb/16 + fta_eq.gb_eq.gb/3 - ta_eq.gb/3 - 11.33;
+    SS_ref_db.gbase[3] 		= atg_eq.gb/16 - ta_eq.gb + ta_eq.gbts - 36;
+    SS_ref_db.gbase[4] 		= andr_eq.gb/2 + atg_eq.gb/16 - gr_eq.gb/2 - ta_eq.gb + ta_eq.gbts - 5;
     
     SS_ref_db.ElShearMod[0] 	= atg_eq.ElShearMod;
-    SS_ref_db.ElShearMod[1] 	= atg_eq.ElShearMod/16 + fta_eq.ElShearMod - ta_eq.ElShearMod;
-    SS_ref_db.ElShearMod[2] 	= atg_eq.ElShearMod/16 + fta_eq.ElShearMod/3 - ta_eq.ElShearMod/3;
-    SS_ref_db.ElShearMod[3] 	= atg_eq.ElShearMod/16 - ta_eq.ElShearMod + tats_eq.ElShearMod;
-    SS_ref_db.ElShearMod[4] 	= andr_eq.ElShearMod/2 + atg_eq.ElShearMod/16 - gr_eq.ElShearMod/2 - ta_eq.ElShearMod + tats_eq.ElShearMod;
+    SS_ref_db.ElShearMod[1] 	= atg_eq.ElShearMod/16 + fta_eq.ElShearMod_eq.ElShearMod - ta_eq.ElShearMod;
+    SS_ref_db.ElShearMod[2] 	= atg_eq.ElShearMod/16 + fta_eq.ElShearMod_eq.ElShearMod/3 - ta_eq.ElShearMod/3;
+    SS_ref_db.ElShearMod[3] 	= atg_eq.ElShearMod/16 - ta_eq.ElShearMod + ta_eq.ElShearModts;
+    SS_ref_db.ElShearMod[4] 	= andr_eq.ElShearMod/2 + atg_eq.ElShearMod/16 - gr_eq.ElShearMod/2 - ta_eq.ElShearMod + ta_eq.ElShearModts;
     
     for (i = 0; i < len_ox; i++){
         SS_ref_db.Comp[0][i] 	= atg_eq.C[i];
-        SS_ref_db.Comp[1][i] 	= atg_eq.C[i]/16 + fta_eq.C[i] - ta_eq.C[i];
-        SS_ref_db.Comp[2][i] 	= atg_eq.C[i]/16 + fta_eq.C[i]/3 - ta_eq.C[i]/3;
-        SS_ref_db.Comp[3][i] 	= atg_eq.C[i]/16 - ta_eq.C[i] + tats_eq.C[i];
-        SS_ref_db.Comp[4][i] 	= andr_eq.C[i]/2 + atg_eq.C[i]/16 - gr_eq.C[i]/2 - ta_eq.C[i] + tats_eq.C[i];
+        SS_ref_db.Comp[1][i] 	= atg_eq.C[i]/16 + fta_eq.C[i]_eq.C[i] - ta_eq.C[i];
+        SS_ref_db.Comp[2][i] 	= atg_eq.C[i]/16 + fta_eq.C[i]_eq.C[i]/3 - ta_eq.C[i]/3;
+        SS_ref_db.Comp[3][i] 	= atg_eq.C[i]/16 - ta_eq.C[i] + ta_eq.C[i]ts;
+        SS_ref_db.Comp[4][i] 	= andr_eq.C[i]/2 + atg_eq.C[i]/16 - gr_eq.C[i]/2 - ta_eq.C[i] + ta_eq.C[i]ts;
     }
     
     for (i = 0; i < n_em; i++){
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4352,7 +4352,7 @@ SS_ref G_SS_ev_g_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_in
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4437,14 +4437,14 @@ SS_ref G_SS_ev_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
     
     SS_ref_db.gbase[0] 		= ta_eq.gb;
     SS_ref_db.gbase[1] 		= fta_eq.gb;
-    SS_ref_db.gbase[2] 		= 2*fta_eq.gb/3 + ta_eq.gb/3 - 2;
+    SS_ref_db.gbase[2] 		= 2*fta_eq.gb_eq.gb/3 + ta_eq.gb/3 - 2;
     SS_ref_db.gbase[3] 		= tats_eq.gb;
     SS_ref_db.gbase[4] 		= andr_eq.gb/2 - gr_eq.gb/2 + tats_eq.gb + 4;
     SS_ref_db.gbase[5] 		= tap_eq.gb;
     
     SS_ref_db.ElShearMod[0] 	= ta_eq.ElShearMod;
     SS_ref_db.ElShearMod[1] 	= fta_eq.ElShearMod;
-    SS_ref_db.ElShearMod[2] 	= 2*fta_eq.ElShearMod/3 + ta_eq.ElShearMod/3;
+    SS_ref_db.ElShearMod[2] 	= 2*fta_eq.ElShearMod_eq.ElShearMod/3 + ta_eq.ElShearMod/3;
     SS_ref_db.ElShearMod[3] 	= tats_eq.ElShearMod;
     SS_ref_db.ElShearMod[4] 	= andr_eq.ElShearMod/2 - gr_eq.ElShearMod/2 + tats_eq.ElShearMod;
     SS_ref_db.ElShearMod[5] 	= tap_eq.ElShearMod;
@@ -4452,7 +4452,7 @@ SS_ref G_SS_ev_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
     for (i = 0; i < len_ox; i++){
         SS_ref_db.Comp[0][i] 	= ta_eq.C[i];
         SS_ref_db.Comp[1][i] 	= fta_eq.C[i];
-        SS_ref_db.Comp[2][i] 	= 2*fta_eq.C[i]/3 + ta_eq.C[i]/3;
+        SS_ref_db.Comp[2][i] 	= 2*fta_eq.C[i]_eq.C[i]/3 + ta_eq.C[i]/3;
         SS_ref_db.Comp[3][i] 	= tats_eq.C[i];
         SS_ref_db.Comp[4][i] 	= andr_eq.C[i]/2 - gr_eq.C[i]/2 + tats_eq.C[i];
         SS_ref_db.Comp[5][i] 	= tap_eq.C[i];
@@ -4462,7 +4462,7 @@ SS_ref G_SS_ev_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4599,7 +4599,7 @@ SS_ref G_SS_ev_chl_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4710,8 +4710,8 @@ SS_ref G_SS_ev_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk
     SS_ref_db.gbase[3] 		= gl_eq.gb + 15;
     SS_ref_db.gbase[4] 		= tr_eq.gb;
     SS_ref_db.gbase[5] 		= fanth_eq.gb + 7;
-    SS_ref_db.gbase[6] 		= 3*anth_eq.gb/7 + 4*fanth_eq.gb/7 - 5.5;
-    SS_ref_db.gbase[7] 		= 2*anth_eq.gb/7 + 5*fanth_eq.gb/7 - 6.7;
+    SS_ref_db.gbase[6] 		= 3*anth_eq.gb/7 + 4*fanth_eq.gb_eq.gb/7 - 5.5;
+    SS_ref_db.gbase[7] 		= 2*anth_eq.gb/7 + 5*fanth_eq.gb_eq.gb/7 - 6.7;
     
     SS_ref_db.ElShearMod[0] 	= anth_eq.ElShearMod;
     SS_ref_db.ElShearMod[1] 	= ged_eq.ElShearMod;
@@ -4719,8 +4719,8 @@ SS_ref G_SS_ev_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk
     SS_ref_db.ElShearMod[3] 	= gl_eq.ElShearMod;
     SS_ref_db.ElShearMod[4] 	= tr_eq.ElShearMod;
     SS_ref_db.ElShearMod[5] 	= fanth_eq.ElShearMod;
-    SS_ref_db.ElShearMod[6] 	= 3*anth_eq.ElShearMod/7 + 4*fanth_eq.ElShearMod/7;
-    SS_ref_db.ElShearMod[7] 	= 2*anth_eq.ElShearMod/7 + 5*fanth_eq.ElShearMod/7;
+    SS_ref_db.ElShearMod[6] 	= 3*anth_eq.ElShearMod/7 + 4*fanth_eq.ElShearMod_eq.ElShearMod/7;
+    SS_ref_db.ElShearMod[7] 	= 2*anth_eq.ElShearMod/7 + 5*fanth_eq.ElShearMod_eq.ElShearMod/7;
     
     for (i = 0; i < len_ox; i++){
         SS_ref_db.Comp[0][i] 	= anth_eq.C[i];
@@ -4729,15 +4729,15 @@ SS_ref G_SS_ev_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk
         SS_ref_db.Comp[3][i] 	= gl_eq.C[i];
         SS_ref_db.Comp[4][i] 	= tr_eq.C[i];
         SS_ref_db.Comp[5][i] 	= fanth_eq.C[i];
-        SS_ref_db.Comp[6][i] 	= 3*anth_eq.C[i]/7 + 4*fanth_eq.C[i]/7;
-        SS_ref_db.Comp[7][i] 	= 2*anth_eq.C[i]/7 + 5*fanth_eq.C[i]/7;
+        SS_ref_db.Comp[6][i] 	= 3*anth_eq.C[i]/7 + 4*fanth_eq.C[i]_eq.C[i]/7;
+        SS_ref_db.Comp[7][i] 	= 2*anth_eq.C[i]/7 + 5*fanth_eq.C[i]_eq.C[i]/7;
     }
     
     for (i = 0; i < n_em; i++){
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4802,7 +4802,7 @@ SS_ref G_SS_ev_spi_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4896,7 +4896,7 @@ SS_ref G_SS_ev_opx_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }
@@ -4945,7 +4945,7 @@ SS_ref G_SS_ev_po_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
         SS_ref_db.z_em[i] = 1.0;
     };
     
-    //!!! RANGE MISSING, WAIT FOR UPDATE !!!
+    !!! RANGE MISSING, WAIT FOR UPDATE !!!
 
     return SS_ref_db;
 }

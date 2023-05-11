@@ -1,0 +1,167 @@
+
+/**
+    Update dpdx matrix of fluid
+*/
+void dpdx_ev_fluid(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = 1.00000000000000;      
+    dp_dx[1][0] = -1.00000000000000;      
+}
+
+
+/**
+    Update dpdx matrix of ol
+*/
+void dpdx_ev_ol(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      
+    dp_dx[1][0] = 1.00000000000000;      
+}
+
+
+/**
+    Update dpdx matrix of br
+*/
+void dpdx_ev_br(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      
+    dp_dx[1][0] = 1.00000000000000;      
+}
+
+
+/**
+    Update dpdx matrix of ch
+*/
+void dpdx_ev_ch(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      
+    dp_dx[1][0] = 1.00000000000000;      
+}
+
+
+/**
+    Update dpdx matrix of atg
+*/
+void dpdx_ev_atg(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = x[1] + x[2] - 1.0;      dp_dx[0][1] = x[0] - 1.0*x[3] - 1.0;      dp_dx[0][2] = x[0] - 1.0*x[3] - 1.0;      dp_dx[0][3] = -1.0*x[1] - 1.0*x[2] + 1.0;      
+    dp_dx[1][0] = 1.00000000000000;      dp_dx[1][1] = -0.5*x[3];      dp_dx[1][2] = -0.5*x[3];      dp_dx[1][3] = -0.5*x[1] - 0.5*x[2] + 0.5;      
+    dp_dx[2][0] = -1.0*x[1] - 1.0*x[2];      dp_dx[2][1] = -1.0*x[0] + 1.5*x[3];      dp_dx[2][2] = -1.0*x[0] + 1.5*x[3];      dp_dx[2][3] = 1.5*x[1] + 1.5*x[2] - 1.5;      
+    dp_dx[3][0] = 0.0;      dp_dx[3][1] = 1.00000000000000;      dp_dx[3][2] = 0.0;      dp_dx[3][3] = 0.0;      
+    dp_dx[4][0] = 0.0;      dp_dx[4][1] = 0.0;      dp_dx[4][2] = 1.00000000000000;      dp_dx[4][3] = 0.0;      
+}
+
+
+/**
+    Update dpdx matrix of g
+*/
+void dpdx_ev_g(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      
+    dp_dx[1][0] = 1.00000000000000;      
+}
+
+
+/**
+    Update dpdx matrix of ta
+*/
+void dpdx_ev_ta(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = x[1] + x[2] - 1.0;      dp_dx[0][1] = x[0] - 2.0;      dp_dx[0][2] = x[0] - 2.0;      dp_dx[0][3] = 0.5*x[4] + 1.0;      dp_dx[0][4] = 0.5*x[3] - 0.5;      
+    dp_dx[1][0] = 1.0 - 1.0*x[3];      dp_dx[1][1] = 0.0;      dp_dx[1][2] = 0.0;      dp_dx[1][3] = -1.0*x[0] + x[4];      dp_dx[1][4] = x[3] - 1.0;      
+    dp_dx[2][0] = -1.0*x[1] - 1.0*x[2] + x[3];      dp_dx[2][1] = -1.0*x[0];      dp_dx[2][2] = -1.0*x[0];      dp_dx[2][3] = x[0] - 1.5*x[4];      dp_dx[2][4] = 1.5 - 1.5*x[3];      
+    dp_dx[3][0] = 0.0;      dp_dx[3][1] = 2.00000000000000;      dp_dx[3][2] = 0.0;      dp_dx[3][3] = -2.00000000000000;      dp_dx[3][4] = 0.0;      
+    dp_dx[4][0] = 0.0;      dp_dx[4][1] = 0.0;      dp_dx[4][2] = 2.00000000000000;      dp_dx[4][3] = 0.0;      dp_dx[4][4] = 0.0;      
+    dp_dx[5][0] = 0.0;      dp_dx[5][1] = 0.0;      dp_dx[5][2] = 0.0;      dp_dx[5][3] = 1.00000000000000;      dp_dx[5][4] = 0.0;      
+}
+
+
+/**
+    Update dpdx matrix of chl
+*/
+void dpdx_ev_chl(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.0*x[1] - 1.0*x[2] + x[3] - 1.0*x[4];      dp_dx[0][1] = -1.0*x[0] + 0.25*x[5] + 1.25*x[6];      dp_dx[0][2] = -1.0*x[0] + 1.25*x[6];      dp_dx[0][3] = x[0] + 0.25*x[5] - 1.0;      dp_dx[0][4] = -1.0*x[0] - 0.25*x[5] + 1.25*x[6] + 2.0;      dp_dx[0][5] = 0.25*x[1] + 0.25*x[3] - 0.25*x[4] - 0.25;      dp_dx[0][6] = 1.25*x[1] + 1.25*x[2] + 1.25*x[4] - 1.25;      
+    dp_dx[1][0] = 3.0*x[1] + 2.0*x[2] + x[4] - 2.0;      dp_dx[1][1] = 3.0*x[0] - 1.25*x[5] - 2.25*x[6] - 1.0;      dp_dx[1][2] = 2.0*x[0] - 2.25*x[6] - 1.0;      dp_dx[1][3] = -1.25*x[5];      dp_dx[1][4] = x[0] + 1.25*x[5] - 2.25*x[6] - 1.0;      dp_dx[1][5] = -1.25*x[1] - 1.25*x[3] + 1.25*x[4] + 1.25;      dp_dx[1][6] = -2.25*x[1] - 2.25*x[2] - 2.25*x[4] + 2.25;      
+    dp_dx[2][0] = 0.0;      dp_dx[2][1] = 1.00000000000000;      dp_dx[2][2] = 0.0;      dp_dx[2][3] = 0.0;      dp_dx[2][4] = -1.00000000000000;      dp_dx[2][5] = 0.0;      dp_dx[2][6] = 0.0;      
+    dp_dx[3][0] = x[1] + x[2] - 1.0*x[3] + x[4];      dp_dx[3][1] = x[0] - 0.25*x[5] - 1.25*x[6];      dp_dx[3][2] = x[0] - 1.25*x[6];      dp_dx[3][3] = -1.0*x[0] - 0.25*x[5];      dp_dx[3][4] = x[0] + 0.25*x[5] - 1.25*x[6];      dp_dx[3][5] = -0.25*x[1] - 0.25*x[3] + 0.25*x[4] + 0.25;      dp_dx[3][6] = -1.25*x[1] - 1.25*x[2] - 1.25*x[4] + 1.25;      
+    dp_dx[4][0] = -1.0*x[1] - 1.0*x[2] - 1.0*x[4] + 1.0;      dp_dx[4][1] = -1.0*x[0] + x[6];      dp_dx[4][2] = -1.0*x[0] + x[6];      dp_dx[4][3] = 0.0;      dp_dx[4][4] = -1.0*x[0] + x[6];      dp_dx[4][5] = 0.0;      dp_dx[4][6] = x[1] + x[2] + x[4] - 1.0;      
+    dp_dx[5][0] = -2.0*x[1] - 1.0*x[2] + 1.0;      dp_dx[5][1] = -2.0*x[0] + 1.25*x[5] + 1.25*x[6];      dp_dx[5][2] = -1.0*x[0] + 1.25*x[6];      dp_dx[5][3] = 1.25*x[5];      dp_dx[5][4] = -1.25*x[5] + 1.25*x[6];      dp_dx[5][5] = 1.25*x[1] + 1.25*x[3] - 1.25*x[4] - 1.25;      dp_dx[5][6] = 1.25*x[1] + 1.25*x[2] + 1.25*x[4] - 1.25;      
+    dp_dx[6][0] = 0.0;      dp_dx[6][1] = 0.0;      dp_dx[6][2] = 1.00000000000000;      dp_dx[6][3] = 0.0;      dp_dx[6][4] = 0.0;      dp_dx[6][5] = 0.0;      dp_dx[6][6] = 0.0;      
+    dp_dx[7][0] = 0.0;      dp_dx[7][1] = 0.0;      dp_dx[7][2] = 0.0;      dp_dx[7][3] = 1.00000000000000;      dp_dx[7][4] = 0.0;      dp_dx[7][5] = 0.0;      dp_dx[7][6] = 0.0;      
+}
+
+
+/**
+    Update dpdx matrix of anth
+*/
+void dpdx_ev_anth(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = x[2] + x[4] - 1.0;      dp_dx[0][1] = x[6] - 1.0;      dp_dx[0][2] = x[0];      dp_dx[0][3] = -0.500000000000000;      dp_dx[0][4] = x[0] - 1.0;      dp_dx[0][5] = -1.50000000000000;      dp_dx[0][6] = x[1] - 1.0;      
+    dp_dx[1][0] = 0.0;      dp_dx[1][1] = 1.00000000000000;      dp_dx[1][2] = -1.00000000000000;      dp_dx[1][3] = -0.500000000000000;      dp_dx[1][4] = 0.0;      dp_dx[1][5] = 0.0;      dp_dx[1][6] = 0.0;      
+    dp_dx[2][0] = 0.0;      dp_dx[2][1] = 0.0;      dp_dx[2][2] = 0.0;      dp_dx[2][3] = 1.00000000000000;      dp_dx[2][4] = 0.0;      dp_dx[2][5] = 0.0;      dp_dx[2][6] = 0.0;      
+    dp_dx[3][0] = 0.0;      dp_dx[3][1] = 0.0;      dp_dx[3][2] = 1.00000000000000;      dp_dx[3][3] = 0.0;      dp_dx[3][4] = 0.0;      dp_dx[3][5] = 0.0;      dp_dx[3][6] = 0.0;      
+    dp_dx[4][0] = 0.0;      dp_dx[4][1] = 0.0;      dp_dx[4][2] = 0.0;      dp_dx[4][3] = 0.0;      dp_dx[4][4] = 1.00000000000000;      dp_dx[4][5] = 0.0;      dp_dx[4][6] = 0.0;      
+    dp_dx[5][0] = -1.0*x[1] + x[2] + x[4] + 1.0;      dp_dx[5][1] = -1.0*x[0] + 2.0*x[6];      dp_dx[5][2] = x[0];      dp_dx[5][3] = 0.0;      dp_dx[5][4] = x[0];      dp_dx[5][5] = -2.50000000000000;      dp_dx[5][6] = 2.0*x[1] - 2.0;      
+    dp_dx[6][0] = -1.0*x[2] - 1.0*x[4];      dp_dx[6][1] = -1.0*x[6];      dp_dx[6][2] = -1.0*x[0];      dp_dx[6][3] = 0.0;      dp_dx[6][4] = -1.0*x[0];      dp_dx[6][5] = 2.50000000000000;      dp_dx[6][6] = 1.0 - 1.0*x[1];      
+    dp_dx[7][0] = x[1] - 1.0*x[2] - 1.0*x[4];      dp_dx[7][1] = x[0] - 2.0*x[6];      dp_dx[7][2] = -1.0*x[0];      dp_dx[7][3] = 0.0;      dp_dx[7][4] = -1.0*x[0];      dp_dx[7][5] = 1.50000000000000;      dp_dx[7][6] = 2.0 - 2.0*x[1];      
+}
+
+
+/**
+    Update dpdx matrix of spi
+*/
+void dpdx_ev_spi(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = 1.00000000000000;      dp_dx[0][1] = 1.00000000000000;      
+    dp_dx[1][0] = -1.00000000000000;      dp_dx[1][1] = 0.0;      
+    dp_dx[2][0] = 0.0;      dp_dx[2][1] = -1.00000000000000;      
+}
+
+
+/**
+    Update dpdx matrix of opx
+*/
+void dpdx_ev_opx(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      dp_dx[0][1] = -1.00000000000000;      dp_dx[0][2] = -1.00000000000000;      dp_dx[0][3] = -0.500000000000000;      
+    dp_dx[1][0] = -1.0*x[1] - 1.0*x[2] + 1.0;      dp_dx[1][1] = -1.0*x[0];      dp_dx[1][2] = -1.0*x[0];      dp_dx[1][3] = -0.500000000000000;      
+    dp_dx[2][0] = x[1] + x[2];      dp_dx[2][1] = x[0];      dp_dx[2][2] = x[0];      dp_dx[2][3] = 1.00000000000000;      
+    dp_dx[3][0] = 0.0;      dp_dx[3][1] = 1.00000000000000;      dp_dx[3][2] = 0.0;      dp_dx[3][3] = 0.0;      
+    dp_dx[4][0] = 0.0;      dp_dx[4][1] = 0.0;      dp_dx[4][2] = 1.00000000000000;      dp_dx[4][3] = 0.0;      
+}
+
+
+/**
+    Update dpdx matrix of po
+*/
+void dpdx_ev_po(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = 8.00000000000000;      
+    dp_dx[1][0] = -8.00000000000000;      
+}
+

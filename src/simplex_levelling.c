@@ -17,13 +17,7 @@ Levelling occurs in two stages:
 #include <time.h>
 #include <string.h>
 #include <complex.h> 
-#if __APPLE__
-	extern void dgetrf( int* M, int* N, double* A, int* lda, int* ipiv, int* info);
-	extern void dgetrs(char* T, int* N, int* nrhs, double* A, int* lda, int* ipiv, double* B, int* ldb, int* info);
-#else
-	#include <lapacke.h> 
-#endif 
-
+#include <lapacke.h> 
 #include "mpi.h"
 
 #include "MAGEMin.h"
@@ -40,6 +34,7 @@ Levelling occurs in two stages:
 #include "PGE_function.h"
 #include "SS_xeos_PC_mp.h" 				//mp is first, it contains the structure definition
 #include "SS_xeos_PC_ig.h"
+#include "SS_xeos_PC_ev.h"
 
 /**
 	associate the array of pointer with the right solution phase
@@ -120,6 +115,43 @@ void SS_mp_objective_init_function(	obj_type 			*SS_objective,
 			SS_objective[iss]  = obj_mp_ilm; 		}
 		else if (strcmp( gv.SS_list[iss], "mt")    == 0){
 			SS_objective[iss]  = obj_mp_mt; 		}
+		else if (strcmp( gv.SS_list[iss], "talc")    == 0){
+			SS_objective[iss]  = obj_mp_talc; 		}
+		else{
+			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", gv.SS_list[iss]);	
+		}	
+	};			
+}
+
+void SS_ev_objective_init_function(	obj_type 			*SS_objective,
+									global_variable 	 gv				){	
+						 
+	for (int iss = 0; iss < gv.len_ss; iss++){
+
+		if      (strcmp( gv.SS_list[iss], "fluid")  == 0 ){
+			SS_objective[iss]  = obj_ev_fluid; 		}
+		else if (strcmp( gv.SS_list[iss], "ol")  == 0){
+			SS_objective[iss]  = obj_ev_ol; 		}
+		else if (strcmp( gv.SS_list[iss], "br") == 0){
+			SS_objective[iss]  = obj_ev_br; 		}
+		else if (strcmp( gv.SS_list[iss], "ch")  == 0){
+			SS_objective[iss]  = obj_ev_ch; 		}
+		else if (strcmp( gv.SS_list[iss], "atg")  == 0){
+			SS_objective[iss]  = obj_ev_atg; 		}
+		else if (strcmp( gv.SS_list[iss], "g")   == 0){
+			SS_objective[iss]  = obj_ev_g; 		}
+		else if (strcmp( gv.SS_list[iss], "ta")  == 0){
+			SS_objective[iss]  = obj_ev_ta; 		}
+		else if (strcmp( gv.SS_list[iss], "chl") == 0){
+			SS_objective[iss]  = obj_ev_chl; 		}
+		else if (strcmp( gv.SS_list[iss], "anth") == 0){
+			SS_objective[iss]  = obj_ev_anth; 		}
+		else if (strcmp( gv.SS_list[iss], "spi")  == 0){
+			SS_objective[iss]  = obj_ev_spi; 		}
+		else if (strcmp( gv.SS_list[iss], "opx") == 0){
+			SS_objective[iss]  = obj_ev_opx; 		}
+		else if (strcmp( gv.SS_list[iss], "po") == 0){
+			SS_objective[iss]  = obj_ev_po; 		}
 		else{
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", gv.SS_list[iss]);	
 		}	
@@ -227,25 +259,6 @@ void update_global_gamma_LU( 				bulk_info 			z_b,
 	/**
 		call lapacke to solve system of linear equation using LU 
 	*/
-#if __APPLE__
-	lda    = d->n_Ox;											/** leading dimension of A*/
-	ldb    = d->n_Ox;
-
-	// Factorisation
-	dgetrf(&d->n_Ox, &d->n_Ox, d->Alu, &lda, ipiv, &info);
-
-	char T = 'T';
-	dgetrs(						&T,
-								&d->n_Ox, 
-								&nrhs, 
-								d->Alu, 
-								&lda, 
-								ipiv, 
-								d->gamma_ss, 
-								&ldb,
-								&info				);
-
-#else	
 	info = LAPACKE_dgesv(		LAPACK_ROW_MAJOR, 
 								d->n_Ox, 
 								nrhs, 
@@ -254,7 +267,7 @@ void update_global_gamma_LU( 				bulk_info 			z_b,
 								ipiv, 
 								d->gamma_ss, 
 								ldb					);
-#endif
+
 	/** update gam_tot using solution phase levelling gamma */
 	for (int i = 0; i < d->n_Ox; i++){
 		d->gamma_delta[z_b.nzEl_array[i]] 	= d->gamma_ss[i] - d->gamma_tot[z_b.nzEl_array[i]];
@@ -386,7 +399,7 @@ void swap_pure_endmembers(				bulk_info 	 		 z_b,
 										d->n_Ox,
 										gv.work,
 										gv.lwork	);
-
+						
 						/** update phase fractions */
 						MatVecMul(		d->A1,
 										z_b.bulk_rock_cat,
@@ -1152,6 +1165,13 @@ void run_simplex_levelling(				bulk_info 	 		 z_b,
 											gv.SS_list[iss]				);
 		}
 	}
+	else if (gv.EM_database == 3){
+		for (iss = 0; iss < gv.len_ss; iss++){
+			SS_ev_pc_init_function(			SS_pc_xeos, 
+											iss,
+											gv.SS_list[iss]				);
+		}
+	}
 
 	for (iss = 0; iss < gv.len_ss; iss++){
 		if (SS_ref_db[iss].ss_flags[0] == 1){
@@ -1231,36 +1251,42 @@ void run_localMinimization(				bulk_info 	 		 z_b,
 											gv.SS_list[ss]				);
 		}
 	}
+	else if (gv.EM_database == 3){
+		for (ss = 0; ss < gv.len_ss; ss++){
+			SS_ev_pc_init_function(			SS_pc_xeos, 
+											ss,
+											gv.SS_list[ss]				);
+		}
+	}
 
-	ss = 6; // hb index of the solution phase to fully minimize
-	// ss = 0; // spn index of the solution phase to fully minimize
-	// ss = 3; // cpx index of the solution phase to fully minimize
+	// ss = 6; // hb index of the solution phase to fully minimize
+	ss = 3; // spn index of the solution phase to fully minimize
 
 	struct ss_pc get_ss_pv;		
 
-	gv.gam_tot[0]  = -960.9655;	
-	gv.gam_tot[1]  = -1768.2476;	
-	gv.gam_tot[2]  = -788.4474;	
-	gv.gam_tot[3]  = -678.9683;	
-	gv.gam_tot[4]  = -355.2975;	
-	gv.gam_tot[5]  = -914.9708;	
-	gv.gam_tot[6]  = -839.9561;
-	gv.gam_tot[7]  = -1008.3630;
-	gv.gam_tot[8]  = -263.7269;
-	gv.gam_tot[9]  = -1262.6087;
-	gv.gam_tot[10] = -368.4674;
+	// gv.gam_tot[0]  = -960.9655;	
+	// gv.gam_tot[1]  = -1768.2476;	
+	// gv.gam_tot[2]  = -788.4474;	
+	// gv.gam_tot[3]  = -678.9683;	
+	// gv.gam_tot[4]  = -355.2975;	
+	// gv.gam_tot[5]  = -914.9708;	
+	// gv.gam_tot[6]  = -839.9561;
+	// gv.gam_tot[7]  = -1008.3630;
+	// gv.gam_tot[8]  = -263.7269;
+	// gv.gam_tot[9]  = -1262.6087;
+	// gv.gam_tot[10] = -368.4674;
 
-	SS_ref_db[ss].gbase[0]  = -13012.62073;	
-	SS_ref_db[ss].gbase[1]  = -13235.27114;	
-	SS_ref_db[ss].gbase[2]  = -13472.30496;	
-	SS_ref_db[ss].gbase[3]  = -12644.70794;	
-	SS_ref_db[ss].gbase[4]  = -12762.02635;	
-	SS_ref_db[ss].gbase[5]  = -10496.70590;	
-	SS_ref_db[ss].gbase[6]  = -11477.04324;
-	SS_ref_db[ss].gbase[7]  = -11155.59746;
-	SS_ref_db[ss].gbase[8]  = -11828.15800;
-	SS_ref_db[ss].gbase[9]  = -13495.08535;
-	SS_ref_db[ss].gbase[10] = -13063.17373;
+	// SS_ref_db[ss].gbase[0]  = -13012.62073;	
+	// SS_ref_db[ss].gbase[1]  = -13235.27114;	
+	// SS_ref_db[ss].gbase[2]  = -13472.30496;	
+	// SS_ref_db[ss].gbase[3]  = -12644.70794;	
+	// SS_ref_db[ss].gbase[4]  = -12762.02635;	
+	// SS_ref_db[ss].gbase[5]  = -10496.70590;	
+	// SS_ref_db[ss].gbase[6]  = -11477.04324;
+	// SS_ref_db[ss].gbase[7]  = -11155.59746;
+	// SS_ref_db[ss].gbase[8]  = -11828.15800;
+	// SS_ref_db[ss].gbase[9]  = -13495.08535;
+	// SS_ref_db[ss].gbase[10] = -13063.17373;
 
 	// SS_ref_db[ss].gbase[0]  = -2515.94540;	
 	// SS_ref_db[ss].gbase[1]  = -2500.25887;	
@@ -1271,29 +1297,29 @@ void run_localMinimization(				bulk_info 	 		 z_b,
 	// SS_ref_db[ss].gbase[6]  = -2033.47165;
 	// SS_ref_db[ss].gbase[7]  = -2445.48343;
 
-	// SS_ref_db[ss].gbase[0]  = -3532.74915;	
-	// SS_ref_db[ss].gbase[1]  = -2793.12846;	
-	// SS_ref_db[ss].gbase[2]  = -3635.49886;	
-	// SS_ref_db[ss].gbase[3]  = -3384.95041;	
-	// SS_ref_db[ss].gbase[4]  = -3250.67812;	
-	// SS_ref_db[ss].gbase[5]  = -3606.43710;	
-	// SS_ref_db[ss].gbase[6]  = -3345.42582;
-	// SS_ref_db[ss].gbase[7]  = -3408.36774;
-	// SS_ref_db[ss].gbase[8]  = -3105.14810;
-	// SS_ref_db[ss].gbase[9]  = -3360.74459;
+	SS_ref_db[ss].gbase[0]  = -3532.74915;	
+	SS_ref_db[ss].gbase[1]  = -2793.12846;	
+	SS_ref_db[ss].gbase[2]  = -3635.49886;	
+	SS_ref_db[ss].gbase[3]  = -3384.95041;	
+	SS_ref_db[ss].gbase[4]  = -3250.67812;	
+	SS_ref_db[ss].gbase[5]  = -3606.43710;	
+	SS_ref_db[ss].gbase[6]  = -3345.42582;
+	SS_ref_db[ss].gbase[7]  = -3408.36774;
+	SS_ref_db[ss].gbase[8]  = -3105.14810;
+	SS_ref_db[ss].gbase[9]  = -3360.74459;
 
 
-	// gv.gam_tot[0]  = -1011.909631;	
-	// gv.gam_tot[1]  = -1829.092564;	
-	// gv.gam_tot[2]  = -819.264126;	
-	// gv.gam_tot[3]  = -695.467358;	
-	// gv.gam_tot[4]  = -412.948568;	
-	// gv.gam_tot[5]  = -971.890270;	
-	// gv.gam_tot[6]  = -876.544354;
-	// gv.gam_tot[7]  = -1073.640927;
-	// gv.gam_tot[8]  = -276.590707;
-	// gv.gam_tot[9]  = -1380.299631;
-	// gv.gam_tot[10] = 0.0;
+	gv.gam_tot[0]  = -1011.909631;	
+	gv.gam_tot[1]  = -1829.092564;	
+	gv.gam_tot[2]  = -819.264126;	
+	gv.gam_tot[3]  = -695.467358;	
+	gv.gam_tot[4]  = -412.948568;	
+	gv.gam_tot[5]  = -971.890270;	
+	gv.gam_tot[6]  = -876.544354;
+	gv.gam_tot[7]  = -1073.640927;
+	gv.gam_tot[8]  = -276.590707;
+	gv.gam_tot[9]  = -1380.299631;
+	gv.gam_tot[10] = 0.0;
 
 
 	/** rotate gbase with respect to the G-hyperplane (change of base) */
@@ -1432,7 +1458,7 @@ global_variable run_levelling_function(		bulk_info 	 z_b,
 											SS_ref_db,
 											SS_objective	);	
 
-	/** run local minimization tests */
+	// /** run local minimization tests */
 	// run_localMinimization(					z_b,
 	// 									    splx_data,
 	// 										gv,

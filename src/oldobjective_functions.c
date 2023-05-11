@@ -1322,8 +1322,8 @@ void p2x_ev_anth(void *SS_ref_db, double eps){
     d->iguess[2]   =  d->p[3];
     d->iguess[3]   =  d->p[2];
     d->iguess[4]   =  d->p[4];
-    d->iguess[5]   =  d->iguess[0] - d->p[5] - d->p[7] ;
-    d->iguess[6]   =  d->iguess[0] - (d->p[5] + d->p[6])/(1 - d->p[1] -0.5*d->p[2] - d->p[3]);
+    Q1  =  d->iguess[0] - d->p[5] - d->p[7] ;
+    Q2  =  d->iguess[0] - (d->p[5] + d->p[6])/(1 - d->p[1] -0.5*d->p[2] - d->p[3]);
     
     for (int i = 0; i < d->n_xeos; i++){
         if (d->iguess[i] < d->bounds[i][0]){
@@ -1341,8 +1341,7 @@ void p2x_ev_anth(void *SS_ref_db, double eps){
 void p2x_ev_spi(void *SS_ref_db, double eps){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     
-    d->iguess[1]  = d->p[0]+d->p[1];
-    d->iguess[0]  = d->iguess[1] - d->p[1] + d->p[2];
+    d->iguess[1]  = d->p[0]+d->p[1]d->iguess[0]  = d->iguess[1] - d->p[1] + d->p[2];
     0;
     
     for (int i = 0; i < d->n_xeos; i++){
@@ -1364,7 +1363,7 @@ void p2x_ev_opx(void *SS_ref_db, double eps){
     d->iguess[0]  = (2*d->p[1]+d->p[2])/(2-d->p[3]-d->p[4]);
     d->iguess[1]  = d->p[3];
     d->iguess[2]  = d->p[4];
-    d->iguess[3]  = 2*(d->p[1]+d->p[2]-d->iguess[0]);
+    Q  = 2*(d->p[1]+d->p[2]-d->iguess[0]);
     
     for (int i = 0; i < d->n_xeos; i++){
         if (d->iguess[i] < d->bounds[i][0]){

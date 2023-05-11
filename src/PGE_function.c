@@ -14,14 +14,7 @@ The routine is the core of MAGEMin algorithm and is constructed around the Gibbs
 #include <time.h>
 #include <string.h>
 #include <complex.h> 
-
-#if __APPLE__
-	extern void dgetrf( int* M, int* N, double* A, int* lda, int* ipiv, int* info);
-	extern void dgetrs(char* T, int* N, int* nrhs, double* A, int* lda, int* ipiv, double* B, int* ldb, int* info);
-#else
-	#include <lapacke.h> 
-#endif 
-
+#include <lapacke.h> 
 
 #include "MAGEMin.h"
 #include "simplex_levelling.h"
@@ -609,35 +602,15 @@ global_variable PGE_solver(		bulk_info 	 		 z_b,
 	/**
 		call lapacke to solve system of linear equation using LU 
 	*/
-	#if __APPLE__
-				lda    = nEntry;											/** leading dimesion of A*/
-				ldb    = nEntry;
-		
-				// Factorisation
-				dgetrf(&nEntry, &nEntry, gv.A_PGE, &lda, gv.ipiv, &info);
+	info = LAPACKE_dgesv(		LAPACK_ROW_MAJOR, 
+								nEntry, 
+								nrhs, 
+								gv.A_PGE, 
+								lda, 
+								gv.ipiv, 
+								gv.b_PGE, 
+								ldb					);
 
-				// Solution (with transpose!)
-				char T = 'T';
-				dgetrs(						&T,
-											&nEntry, 
-											&nrhs, 
-											gv.A_PGE,
-											&lda, 
-											gv.ipiv, 
-											gv.b_PGE, 
-											&nEntry,
-											&info	);
-
-	#else
-		info = LAPACKE_dgesv(		LAPACK_ROW_MAJOR, 
-									nEntry, 
-									nrhs, 
-									gv.A_PGE, 
-									lda, 
-									gv.ipiv, 
-									gv.b_PGE, 
-									ldb					);
-	#endif
 	/**
 		get solution and max values for the set of variables
 	*/
@@ -1408,7 +1381,7 @@ global_variable PGE(	bulk_info 			z_b,
 
 		/**
 			Actual Partitioning Gibbs Energy stage 
-		/*/
+		*/
 		gv = PGE_inner_loop(			z_b,							/** bulk rock constraint 				*/ 
 										splx_data,
 										gv,								/** global variables (e.g. Gamma) 		*/

@@ -1,0 +1,295 @@
+PC FUNCTION
+
+   if (gv.EM_database == 0){
+      if (strcmp( name, "fluid") == 0 ){
+         G0 = obj_ev_fluid(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "ol") == 0 ){
+         G0 = obj_ev_ol(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "br") == 0 ){
+         G0 = obj_ev_br(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "ch") == 0 ){
+         G0 = obj_ev_ch(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "atg") == 0 ){
+         G0 = obj_ev_atg(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "g") == 0 ){
+         G0 = obj_ev_g(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "ta") == 0 ){
+         G0 = obj_ev_ta(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "chl") == 0 ){
+         G0 = obj_ev_chl(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "anth") == 0 ){
+         G0 = obj_ev_anth(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "spi") == 0 ){
+         G0 = obj_ev_spi(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "opx") == 0 ){
+         G0 = obj_ev_opx(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else if (strcmp( name, "po") == 0 ){
+         G0 = obj_ev_po(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+      }
+      else{
+         printf("\nsolid solution '%s' is not in the database\n",name);
+      }
+   }
+
+
+P2X
+
+   if (gv.EM_database == 0){
+      if (strcmp( name, "fluid") == 0 ){
+         p2x_ev_fluid(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "ol") == 0 ){
+         p2x_ev_ol(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "br") == 0 ){
+         p2x_ev_br(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "ch") == 0 ){
+         p2x_ev_ch(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "atg") == 0 ){
+         p2x_ev_atg(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "g") == 0 ){
+         p2x_ev_g(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "ta") == 0 ){
+         p2x_ev_ta(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "chl") == 0 ){
+         p2x_ev_chl(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "anth") == 0 ){
+         p2x_ev_anth(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "spi") == 0 ){
+         p2x_ev_spi(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "opx") == 0 ){
+         p2x_ev_opx(&SS_ref_db, eps);
+      }
+      else if (strcmp( name, "po") == 0 ){
+         p2x_ev_po(&SS_ref_db, eps);
+      }
+      else{
+         printf("\nsolid solution '%s' is not in the database\n",name);
+      }
+   }
+
+
+P2X_H
+
+void p2x_ev_fluid(  SS_ref SS_ref_db, double eps);
+void p2x_ev_ol(  SS_ref SS_ref_db, double eps);
+void p2x_ev_br(  SS_ref SS_ref_db, double eps);
+void p2x_ev_ch(  SS_ref SS_ref_db, double eps);
+void p2x_ev_atg(  SS_ref SS_ref_db, double eps);
+void p2x_ev_g(  SS_ref SS_ref_db, double eps);
+void p2x_ev_ta(  SS_ref SS_ref_db, double eps);
+void p2x_ev_chl(  SS_ref SS_ref_db, double eps);
+void p2x_ev_anth(  SS_ref SS_ref_db, double eps);
+void p2x_ev_spi(  SS_ref SS_ref_db, double eps);
+void p2x_ev_opx(  SS_ref SS_ref_db, double eps);
+void p2x_ev_po(  SS_ref SS_ref_db, double eps);
+
+
+
+
+OBJ
+
+   for (int iss = 0; iss < gv.len_ss; iss++){
+      if (strcmp( gv.SS_list[iss], "fluid")  == 0){
+         SS_objective[iss]  = obj_ev_fluid;
+      }
+      else if (strcmp( gv.SS_list[iss], "ol")  == 0){
+         SS_objective[iss]  = obj_ev_ol;
+      }
+      else if (strcmp( gv.SS_list[iss], "br")  == 0){
+         SS_objective[iss]  = obj_ev_br;
+      }
+      else if (strcmp( gv.SS_list[iss], "ch")  == 0){
+         SS_objective[iss]  = obj_ev_ch;
+      }
+      else if (strcmp( gv.SS_list[iss], "atg")  == 0){
+         SS_objective[iss]  = obj_ev_atg;
+      }
+      else if (strcmp( gv.SS_list[iss], "g")  == 0){
+         SS_objective[iss]  = obj_ev_g;
+      }
+      else if (strcmp( gv.SS_list[iss], "ta")  == 0){
+         SS_objective[iss]  = obj_ev_ta;
+      }
+      else if (strcmp( gv.SS_list[iss], "chl")  == 0){
+         SS_objective[iss]  = obj_ev_chl;
+      }
+      else if (strcmp( gv.SS_list[iss], "anth")  == 0){
+         SS_objective[iss]  = obj_ev_anth;
+      }
+      else if (strcmp( gv.SS_list[iss], "spi")  == 0){
+         SS_objective[iss]  = obj_ev_spi;
+      }
+      else if (strcmp( gv.SS_list[iss], "opx")  == 0){
+         SS_objective[iss]  = obj_ev_opx;
+      }
+      else if (strcmp( gv.SS_list[iss], "po")  == 0){
+         SS_objective[iss]  = obj_ev_po;
+      }
+      else{
+         printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", gv.SS_list[iss]);
+      }
+   }
+
+
+P2X_H
+
+void p2x_ev_fluid(  SS_ref SS_ref_db, double eps);
+void p2x_ev_ol(  SS_ref SS_ref_db, double eps);
+void p2x_ev_br(  SS_ref SS_ref_db, double eps);
+void p2x_ev_ch(  SS_ref SS_ref_db, double eps);
+void p2x_ev_atg(  SS_ref SS_ref_db, double eps);
+void p2x_ev_g(  SS_ref SS_ref_db, double eps);
+void p2x_ev_ta(  SS_ref SS_ref_db, double eps);
+void p2x_ev_chl(  SS_ref SS_ref_db, double eps);
+void p2x_ev_anth(  SS_ref SS_ref_db, double eps);
+void p2x_ev_spi(  SS_ref SS_ref_db, double eps);
+void p2x_ev_opx(  SS_ref SS_ref_db, double eps);
+void p2x_ev_po(  SS_ref SS_ref_db, double eps);
+
+
+OBJ_H
+
+double obj_ev_fluid(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_ol(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_br(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_ch(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_atg(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_g(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_ta(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_chl(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_anth(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_spi(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_opx(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_ev_po(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+
+
+NLOPT
+
+   if (gv.EM_database == 0){
+      if (strcmp( gv.SS_list[index], "fluid")  == 0){
+         SS_ref_db  = NLopt_opt_ev_fluid_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "ol")  == 0){
+         SS_ref_db  = NLopt_opt_ev_ol_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "br")  == 0){
+         SS_ref_db  = NLopt_opt_ev_br_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "ch")  == 0){
+         SS_ref_db  = NLopt_opt_ev_ch_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "atg")  == 0){
+         SS_ref_db  = NLopt_opt_ev_atg_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "g")  == 0){
+         SS_ref_db  = NLopt_opt_ev_g_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "ta")  == 0){
+         SS_ref_db  = NLopt_opt_ev_ta_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "chl")  == 0){
+         SS_ref_db  = NLopt_opt_ev_chl_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "anth")  == 0){
+         SS_ref_db  = NLopt_opt_ev_anth_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "spi")  == 0){
+         SS_ref_db  = NLopt_opt_ev_spi_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "opx")  == 0){
+         SS_ref_db  = NLopt_opt_ev_opx_function( gv, SS_ref_db);}
+      else if (strcmp( gv.SS_list[index], "po")  == 0){
+         SS_ref_db  = NLopt_opt_ev_po_function( gv, SS_ref_db);}
+      else{
+         printf("\nsolid solution '%s index %d' is not in the database\n",gv.SS_list[index], index);
+      }
+   }
+
+
+GSS INIT
+
+   if (EM_database == 0){
+      if (strcmp( name, "fluid") == 0 ){
+         SS_ref_db  = G_SS_ev_fluid_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "ol") == 0 ){
+         SS_ref_db  = G_SS_ev_ol_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "br") == 0 ){
+         SS_ref_db  = G_SS_ev_br_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "ch") == 0 ){
+         SS_ref_db  = G_SS_ev_ch_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "atg") == 0 ){
+         SS_ref_db  = G_SS_ev_atg_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "g") == 0 ){
+         SS_ref_db  = G_SS_ev_g_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "ta") == 0 ){
+         SS_ref_db  = G_SS_ev_ta_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "chl") == 0 ){
+         SS_ref_db  = G_SS_ev_chl_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "anth") == 0 ){
+         SS_ref_db  = G_SS_ev_anth_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "spi") == 0 ){
+         SS_ref_db  = G_SS_ev_spi_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "opx") == 0 ){
+         SS_ref_db  = G_SS_ev_opx_init_function(SS_ref_db, EM_database, gv); }
+      else if (strcmp( name, "po") == 0 ){
+         SS_ref_db  = G_SS_ev_po_init_function(SS_ref_db, EM_database, gv); }
+      else{
+         printf("\nsolid solution '%s' is not in the database\n",name);
+      }
+   }
+
+
+GSS FUNCTION
+
+   /* Associate the right solid-solution data */
+   for (int FD = 0; FD < gv.n_Diff; FD++){				/* cycle twice in order to get gb_P_eps to calculate densities later on */
+      if (FD == 8 || FD == 9){				// dG/dP0 to get Volume at P = 1bar
+         SS_ref_db.P = 1.+ gv.gb_P_eps*gv.pdev[0][FD];
+         SS_ref_db.T = T + gv.gb_T_eps*gv.pdev[1][FD];
+      }
+      else{
+         SS_ref_db.P = P + gv.gb_P_eps*gv.pdev[0][FD];
+         SS_ref_db.T = T + gv.gb_T_eps*gv.pdev[1][FD];
+      }
+      if (strcmp( name, "fluid") == 0 ){
+         SS_ref_db  = G_SS_ev_fluid_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "ol") == 0 ){
+         SS_ref_db  = G_SS_ev_ol_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "br") == 0 ){
+         SS_ref_db  = G_SS_ev_br_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "ch") == 0 ){
+         SS_ref_db  = G_SS_ev_ch_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "atg") == 0 ){
+         SS_ref_db  = G_SS_ev_atg_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "g") == 0 ){
+         SS_ref_db  = G_SS_ev_g_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "ta") == 0 ){
+         SS_ref_db  = G_SS_ev_ta_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "chl") == 0 ){
+         SS_ref_db  = G_SS_ev_chl_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "anth") == 0 ){
+         SS_ref_db  = G_SS_ev_anth_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "spi") == 0 ){
+         SS_ref_db  = G_SS_ev_spi_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "opx") == 0 ){
+         SS_ref_db  = G_SS_ev_opx_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else if (strcmp( name, "po") == 0 ){
+         SS_ref_db  = G_SS_ev_po_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+      else{
+         printf("\nsolid solution '%s' is not in the database\n",name);	}
+
+      for (int j = 0; j < SS_ref_db.n_em; j++){
+         SS_ref_db.mu_array[FD][j] = SS_ref_db.gbase[j];
+         // printf(" %+10.10f",SS_ref_db.gbase[j]);
+      }
+   }
