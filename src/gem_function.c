@@ -42,8 +42,6 @@ PP_ref G_EM_function(		int 		 EM_database,
 		for other databases. Ideally, we would therefore here call a seperate 
 		routine depending on the EM_database.
     */
-
-	/** if (EM_database == _tc_ds633_) { **/
 	double t0, 	p0, 	R;
 	double pth, theta, 	vv;
 	double enthalpy, 	entropy, volume;

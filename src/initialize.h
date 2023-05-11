@@ -218,7 +218,7 @@ typedef struct ultramafic_datasets {
 	int 	n_ox;
 	int 	n_pp;
 	int 	n_ss;
-	char    ox[11][20];
+	char    ox[6][20];
 	char    PP[15][20];
 	char    SS[12][20];
 
@@ -244,12 +244,12 @@ typedef struct ultramafic_datasets {
 
 ultramafic_dataset ultramafic_db = {
 	256,						/* number of endmembers */
-	7,							/* number of oxides */			
+	6,							/* number of oxides */			
 	15,							/* number of pure phases */
 	12,							/* number of solution phases */
-	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"O"	,"H2O"						},
+	{"SiO2"	,"Al2O3","MgO"	,"FeO"	,"O"	,"H2O"						},
 	{"q"	,"crst"	,"trd"	,"coe"	,"stv"	,"ky"	,"sill"	,"and"	,"ru"	,"sph"	,"wo"	,"pswo"	,"ne"	,"O2"  ,"H2O"				},//!!!!!!have to check pure endmerber for ultramafic comp
-	{"fluid", "ol"   ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"		},
+	{"fluid", "ol"  ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"		},
 	
 	{1		,1		,1		,1		,1		,1		,1		,1		,1 		,1 		,1 		,1 		},  // allow solvus?
 	{11  	,10  	,10 	,10 	,489 	,10  	,985 	,2425	,3136	,100	,196	,10		},  // No. of pseudocompound
@@ -487,7 +487,50 @@ global_variable global_variable_init( 	global_variable  	 gv,
 			gv.SS_PC_stp[i] = db.SS_PC_stp[i]; 	
 		}
 	}
+	else if (gv.EM_database == 4){
+		ultramafic_dataset db 	= ultramafic_db;
+		gv.n_em_db 			= db.n_em_db;
+		gv.len_pp   		= db.n_pp;		
+		gv.len_ss  			= db.n_ss;
+		gv.len_ox  			= db.n_ox;
 
+		gv.PC_df_add		= db.PC_df_add;					/** min value of df under which the PC is added 									*/
+		gv.solver_switch_T  = db.solver_switch_T;
+		gv.min_melt_T       = db.min_melt_T;				/** minimum temperature above which melt is considered 								*/
+
+		gv.inner_PGE_ite    = db.inner_PGE_ite;				/** number of inner PGE iterations, this has to be made mass or dG dependent 		*/
+		gv.max_n_phase  	= db.max_n_phase;				/** maximum mol% phase change during one PGE iteration in wt% 						*/
+		gv.max_g_phase  	= db.max_g_phase;				/** maximum delta_G of reference change during PGE 									*/
+		gv.max_fac          = db.max_fac;					/** maximum update factor during PGE under-relax < 0.0, over-relax > 0.0 	 		*/
+
+		gv.merge_value		= db.merge_value;				/** merge instances of solution phase if norm < val 								*/
+		gv.re_in_n          = db.re_in_n;					/** fraction of phase when being reintroduce.  										*/
+		gv.obj_tol 			= db.obj_tol;
+
+		gv.ox 				= malloc (gv.len_ox * sizeof(char*)		);
+		for (i = 0; i < gv.len_ox; i++){
+			gv.ox[i] 		= malloc(20 * sizeof(char));	
+			strcpy(gv.ox[i],db.ox[i]);
+		}
+
+		gv.PP_list 			= malloc (gv.len_pp * sizeof(char*)		);
+		for (i = 0; i < (gv.len_pp); i++){	
+			gv.PP_list[i] 	= malloc(20 * sizeof(char));
+			strcpy(gv.PP_list[i],db.PP[i]);
+		}
+
+		gv.SS_list 			= malloc ((gv.len_ss) * sizeof (char*)	);
+		gv.n_SS_PC     		= malloc ((gv.len_ss) * sizeof (int) 	);
+		gv.verifyPC  		= malloc ((gv.len_ss) * sizeof (int) 	);
+		gv.SS_PC_stp     	= malloc ((gv.len_ss) * sizeof (double) );
+		for (i = 0; i < gv.len_ss; i++){ 
+			gv.SS_list[i] 	= malloc(20 * sizeof(char)				);
+			strcpy(gv.SS_list[i],db.SS[i]);
+			gv.verifyPC[i]  = db.verifyPC[i]; 
+			gv.n_SS_PC[i] 	= db.n_SS_PC[i]; 
+			gv.SS_PC_stp[i] = db.SS_PC_stp[i]; 	
+		}
+	}
 	/**
 	   ALLOCATE MEMORY OF OTHER GLOBAL VARIABLES
 	*/
@@ -827,6 +870,39 @@ global_variable get_bulk_igneous( global_variable gv) {
 	return gv;
 }
 
+
+/* Get benchmark bulk rock composition given by Holland et al., 2018*/
+global_variable get_bulk_ultramafic( global_variable gv) {
+ 	if (gv.test != -1){
+		if (gv.verbose == 1){
+			printf("\n");
+			printf("   - Minimization using in-built bulk-rock  : test %2d\n",gv.test);	
+		}							
+	}
+	else{
+		gv.test = 0;
+		if (gv.verbose == 1){
+			printf("\n");
+			printf("   - No predefined bulk provided -> user custom bulk (if none provided, will run default KLB1)\n");	
+		}	
+	}
+	if (gv.test == 0){ //KLB1
+		/* SiO2 Al2O3 MgO FeO O H2O */
+		/* Bulk rock composition of Peridotite from Holland et al., 2018, given by E. Green */
+		gv.bulk_rock[0]  = 38.494 ;		/** SiO2 	*/
+		gv.bulk_rock[1]  = 1.776;		/** Al2O2 	*/
+		gv.bulk_rock[3]  = 50.566;		/** MgO 	*/
+		gv.bulk_rock[4]  = 5.886;		/** FeO 	*/
+		gv.bulk_rock[8]  = 0.096;		/** O 		*/
+		gv.bulk_rock[10] =	0.0;	
+	}
+	
+	else{
+		printf("Unknown test %i - please specify a different test! \n", gv.test);
+	 	exit(EXIT_FAILURE);
+	}
+	return gv;
+}
 
 /**
   reset global variable for parallel calculations 

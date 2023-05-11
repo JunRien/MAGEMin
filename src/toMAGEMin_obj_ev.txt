@@ -2,7 +2,7 @@
 /**
     Objective function of fluid
 */
-double obj_ev_fluid(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_fluid(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -14,7 +14,7 @@ double obj_ev_fluid(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_fluid(SS_ref_db,x);
+    px_um_fluid(SS_ref_db,x);
 
     
     sf[0]          = 1.0*x[0];
@@ -39,7 +39,7 @@ double obj_ev_fluid(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_fluid(SS_ref_db,x);
+        dpdx_um_fluid(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -55,7 +55,7 @@ double obj_ev_fluid(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of ol
 */
-double obj_ev_ol(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_ol(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -67,7 +67,7 @@ double obj_ev_ol(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_ol(SS_ref_db,x);
+    px_um_ol(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -102,7 +102,7 @@ double obj_ev_ol(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_ol(SS_ref_db,x);
+        dpdx_um_ol(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -118,7 +118,7 @@ double obj_ev_ol(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of br
 */
-double obj_ev_br(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_br(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -130,7 +130,7 @@ double obj_ev_br(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_br(SS_ref_db,x);
+    px_um_br(SS_ref_db,x);
 
     
     sf[0]          = 1.0 - x[0];
@@ -155,7 +155,7 @@ double obj_ev_br(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_br(SS_ref_db,x);
+        dpdx_um_br(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -171,7 +171,7 @@ double obj_ev_br(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of ch
 */
-double obj_ev_ch(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_ch(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -183,7 +183,7 @@ double obj_ev_ch(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_ch(SS_ref_db,x);
+    px_um_ch(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -218,7 +218,7 @@ double obj_ev_ch(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_ch(SS_ref_db,x);
+        dpdx_um_ch(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -234,7 +234,7 @@ double obj_ev_ch(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of atg
 */
-double obj_ev_atg(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_atg(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -246,7 +246,7 @@ double obj_ev_atg(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_atg(SS_ref_db,x);
+    px_um_atg(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -290,7 +290,7 @@ double obj_ev_atg(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_atg(SS_ref_db,x);
+        dpdx_um_atg(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -306,7 +306,7 @@ double obj_ev_atg(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of g
 */
-double obj_ev_g(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_g(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -318,7 +318,7 @@ double obj_ev_g(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_g(SS_ref_db,x);
+    px_um_g(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -353,7 +353,7 @@ double obj_ev_g(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_g(SS_ref_db,x);
+        dpdx_um_g(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -369,7 +369,7 @@ double obj_ev_g(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of ta
 */
-double obj_ev_ta(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_ta(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -381,7 +381,7 @@ double obj_ev_ta(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_ta(SS_ref_db,x);
+    px_um_ta(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -427,7 +427,7 @@ double obj_ev_ta(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_ta(SS_ref_db,x);
+        dpdx_um_ta(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -443,7 +443,7 @@ double obj_ev_ta(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of chl
 */
-double obj_ev_chl(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_chl(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -455,7 +455,7 @@ double obj_ev_chl(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_chl(SS_ref_db,x);
+    px_um_chl(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -507,7 +507,7 @@ double obj_ev_chl(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_chl(SS_ref_db,x);
+        dpdx_um_chl(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -523,7 +523,7 @@ double obj_ev_chl(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of anth
 */
-double obj_ev_anth(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_anth(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -536,7 +536,7 @@ double obj_ev_anth(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_anth(SS_ref_db,x);
+    px_um_anth(SS_ref_db,x);
 
     d->sum_v = 0.0;
     for (int i = 0; i < n_em; i++){
@@ -596,7 +596,7 @@ double obj_ev_anth(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_anth(SS_ref_db,x);
+        dpdx_um_anth(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -612,7 +612,7 @@ double obj_ev_anth(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of spi
 */
-double obj_ev_spi(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_spi(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -624,7 +624,7 @@ double obj_ev_spi(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_spi(SS_ref_db,x);
+    px_um_spi(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -662,7 +662,7 @@ double obj_ev_spi(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_spi(SS_ref_db,x);
+        dpdx_um_spi(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -678,7 +678,7 @@ double obj_ev_spi(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of opx
 */
-double obj_ev_opx(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_opx(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -690,7 +690,7 @@ double obj_ev_opx(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_opx(SS_ref_db,x);
+    px_um_opx(SS_ref_db,x);
 
     for (int i = 0; i < n_em; i++){
         mu_Gex[i] = 0.0;
@@ -734,7 +734,7 @@ double obj_ev_opx(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_opx(SS_ref_db,x);
+        dpdx_um_opx(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){
@@ -750,7 +750,7 @@ double obj_ev_opx(unsigned n, const double *x, double *grad, void *SS_ref_db){
 /**
     Objective function of po
 */
-double obj_ev_po(unsigned n, const double *x, double *grad, void *SS_ref_db){
+double obj_um_po(unsigned n, const double *x, double *grad, void *SS_ref_db){
     SS_ref *d         = (SS_ref *) SS_ref_db;
 
     int n_em          = d->n_em;
@@ -762,7 +762,7 @@ double obj_ev_po(unsigned n, const double *x, double *grad, void *SS_ref_db){
     double *mu_Gex    = d->mu_Gex;
     double *sf        = d->sf;
     double *mu        = d->mu;
-    px_ev_po(SS_ref_db,x);
+    px_um_po(SS_ref_db,x);
 
     
     sf[0]          = 1.0 - x[0];
@@ -787,7 +787,7 @@ double obj_ev_po(unsigned n, const double *x, double *grad, void *SS_ref_db){
     if (grad){
         double *dfx    = d->dfx;
         double **dp_dx = d->dp_dx;
-        dpdx_ev_po(SS_ref_db,x);
+        dpdx_um_po(SS_ref_db,x);
         for (int i = 0; i < (d->n_xeos); i++){
             dfx[i] = 0.0;
             for (int j = 0; j < n_em; j++){

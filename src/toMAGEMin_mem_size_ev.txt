@@ -1,7 +1,7 @@
 /**
     allocate memory for fluid
 */
-SS_ref G_SS_ev_fluid_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_fluid_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = -1;
@@ -16,7 +16,7 @@ SS_ref G_SS_ev_fluid_init_function(SS_ref SS_ref_db, int EM_database, global_var
 /**
     allocate memory for ol
 */
-SS_ref G_SS_ev_ol_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_ol_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -32,7 +32,7 @@ SS_ref G_SS_ev_ol_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for br
 */
-SS_ref G_SS_ev_br_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_br_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = -1;
@@ -47,7 +47,7 @@ SS_ref G_SS_ev_br_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for ch
 */
-SS_ref G_SS_ev_ch_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_ch_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -63,7 +63,7 @@ SS_ref G_SS_ev_ch_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for atg
 */
-SS_ref G_SS_ev_atg_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_atg_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -79,7 +79,7 @@ SS_ref G_SS_ev_atg_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for g
 */
-SS_ref G_SS_ev_g_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_g_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -95,7 +95,7 @@ SS_ref G_SS_ev_g_init_function(SS_ref SS_ref_db, int EM_database, global_variabl
 /**
     allocate memory for ta
 */
-SS_ref G_SS_ev_ta_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_ta_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -111,7 +111,7 @@ SS_ref G_SS_ev_ta_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for chl
 */
-SS_ref G_SS_ev_chl_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_chl_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -127,7 +127,7 @@ SS_ref G_SS_ev_chl_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for anth
 */
-SS_ref G_SS_ev_anth_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_anth_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 0;
@@ -144,7 +144,7 @@ SS_ref G_SS_ev_anth_init_function(SS_ref SS_ref_db, int EM_database, global_vari
 /**
     allocate memory for spi
 */
-SS_ref G_SS_ev_spi_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_spi_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -160,7 +160,7 @@ SS_ref G_SS_ev_spi_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for opx
 */
-SS_ref G_SS_ev_opx_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_opx_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -176,7 +176,7 @@ SS_ref G_SS_ev_opx_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for po
 */
-SS_ref G_SS_ev_po_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_po_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = -1;

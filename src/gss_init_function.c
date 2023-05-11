@@ -147,7 +147,7 @@ stb_system SP_INIT_function(stb_system sp, global_variable gv){
 /**
     allocate memory for fluid
 */
-SS_ref G_SS_ev_fluid_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_fluid_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = -1;
@@ -162,7 +162,7 @@ SS_ref G_SS_ev_fluid_init_function(SS_ref SS_ref_db, int EM_database, global_var
 /**
     allocate memory for ol
 */
-SS_ref G_SS_ev_ol_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_ol_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -178,7 +178,7 @@ SS_ref G_SS_ev_ol_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for br
 */
-SS_ref G_SS_ev_br_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_br_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = -1;
@@ -193,7 +193,7 @@ SS_ref G_SS_ev_br_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for ch
 */
-SS_ref G_SS_ev_ch_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_ch_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -209,7 +209,7 @@ SS_ref G_SS_ev_ch_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for atg
 */
-SS_ref G_SS_ev_atg_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_atg_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -225,7 +225,7 @@ SS_ref G_SS_ev_atg_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for g
 */
-SS_ref G_SS_ev_g_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_g_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -241,7 +241,7 @@ SS_ref G_SS_ev_g_init_function(SS_ref SS_ref_db, int EM_database, global_variabl
 /**
     allocate memory for ta
 */
-SS_ref G_SS_ev_ta_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_ta_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -257,7 +257,7 @@ SS_ref G_SS_ev_ta_init_function(SS_ref SS_ref_db, int EM_database, global_variab
 /**
     allocate memory for chl
 */
-SS_ref G_SS_ev_chl_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_chl_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -273,7 +273,7 @@ SS_ref G_SS_ev_chl_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for anth
 */
-SS_ref G_SS_ev_anth_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_anth_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 0;
@@ -290,7 +290,7 @@ SS_ref G_SS_ev_anth_init_function(SS_ref SS_ref_db, int EM_database, global_vari
 /**
     allocate memory for spi
 */
-SS_ref G_SS_ev_spi_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_spi_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -306,7 +306,7 @@ SS_ref G_SS_ev_spi_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for opx
 */
-SS_ref G_SS_ev_opx_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_opx_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -322,7 +322,7 @@ SS_ref G_SS_ev_opx_init_function(SS_ref SS_ref_db, int EM_database, global_varia
 /**
     allocate memory for po
 */
-SS_ref G_SS_ev_po_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+SS_ref G_SS_um_po_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
     
     SS_ref_db.is_liq    = 0;
     SS_ref_db.symmetry  = 1;
@@ -939,31 +939,31 @@ SS_ref G_SS_init_EM_function(		int			 		 ph_id,
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", name);	
 		}	
 	}
-	else if (EM_database == 3) {	 //"fluid","ol","br","ch","atg","g","ta","chl","anth","spi","opx","po"	
+	else if (EM_database == 4) {	 //"fluid","ol","br","ch","atg","g","ta","chl","anth","spi","opx","po"	
 		if      (strcmp( name, "fluid")  == 0 ){
-			SS_ref_db  = G_SS_ev_fluid_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_fluid_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "ol")  == 0){
-			SS_ref_db  = G_SS_ev_ol_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_ol_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "br") == 0){
-			SS_ref_db  = G_SS_ev_br_init_function(SS_ref_db, EM_database, gv); 	}	
+			SS_ref_db  = G_SS_um_br_init_function(SS_ref_db, EM_database, gv); 	}	
 		else if (strcmp( name, "ch")  == 0){
-			SS_ref_db  = G_SS_ev_ch_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_ch_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "atg")  == 0){
-			SS_ref_db  = G_SS_ev_atg_init_function(SS_ref_db, EM_database, gv); 		}		
+			SS_ref_db  = G_SS_um_atg_init_function(SS_ref_db, EM_database, gv); 		}		
 		else if (strcmp( name, "g")   == 0){
-			SS_ref_db  = G_SS_ev_g_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_g_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "ta")  == 0){
-			SS_ref_db  = G_SS_ev_ta_init_function(SS_ref_db, EM_database, gv); 		}	
+			SS_ref_db  = G_SS_um_ta_init_function(SS_ref_db, EM_database, gv); 		}	
 		else if (strcmp( name, "chl") == 0){
-			SS_ref_db  = G_SS_ev_chl_init_function(SS_ref_db, EM_database, gv); 	}
+			SS_ref_db  = G_SS_um_chl_init_function(SS_ref_db, EM_database, gv); 	}
 		else if (strcmp( name, "anth") == 0){
-			SS_ref_db  = G_SS_ev_anth_init_function(SS_ref_db, EM_database, gv); 	}
+			SS_ref_db  = G_SS_um_anth_init_function(SS_ref_db, EM_database, gv); 	}
 		else if (strcmp( name, "spi")  == 0){
-			SS_ref_db  = G_SS_ev_spi_init_function(SS_ref_db, EM_database, gv); 		}	
+			SS_ref_db  = G_SS_um_spi_init_function(SS_ref_db, EM_database, gv); 		}	
 		else if (strcmp( name, "opx")  == 0){
-			SS_ref_db  = G_SS_ev_opx_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_opx_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "po") == 0){
-			SS_ref_db  = G_SS_ev_po_init_function(SS_ref_db, EM_database, gv); 	}
+			SS_ref_db  = G_SS_um_po_init_function(SS_ref_db, EM_database, gv); 	}
 		else{
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", name);	
 		}	

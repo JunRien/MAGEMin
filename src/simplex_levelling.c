@@ -123,35 +123,35 @@ void SS_mp_objective_init_function(	obj_type 			*SS_objective,
 	};			
 }
 
-void SS_ev_objective_init_function(	obj_type 			*SS_objective,
+void SS_um_objective_init_function(	obj_type 			*SS_objective,
 									global_variable 	 gv				){	
 						 
 	for (int iss = 0; iss < gv.len_ss; iss++){
 
 		if      (strcmp( gv.SS_list[iss], "fluid")  == 0 ){
-			SS_objective[iss]  = obj_ev_fluid; 		}
+			SS_objective[iss]  = obj_um_fluid; 		}
 		else if (strcmp( gv.SS_list[iss], "ol")  == 0){
-			SS_objective[iss]  = obj_ev_ol; 		}
+			SS_objective[iss]  = obj_um_ol; 		}
 		else if (strcmp( gv.SS_list[iss], "br") == 0){
-			SS_objective[iss]  = obj_ev_br; 		}
+			SS_objective[iss]  = obj_um_br; 		}
 		else if (strcmp( gv.SS_list[iss], "ch")  == 0){
-			SS_objective[iss]  = obj_ev_ch; 		}
+			SS_objective[iss]  = obj_um_ch; 		}
 		else if (strcmp( gv.SS_list[iss], "atg")  == 0){
-			SS_objective[iss]  = obj_ev_atg; 		}
+			SS_objective[iss]  = obj_um_atg; 		}
 		else if (strcmp( gv.SS_list[iss], "g")   == 0){
-			SS_objective[iss]  = obj_ev_g; 		}
+			SS_objective[iss]  = obj_um_g; 		}
 		else if (strcmp( gv.SS_list[iss], "ta")  == 0){
-			SS_objective[iss]  = obj_ev_ta; 		}
+			SS_objective[iss]  = obj_um_ta; 		}
 		else if (strcmp( gv.SS_list[iss], "chl") == 0){
-			SS_objective[iss]  = obj_ev_chl; 		}
+			SS_objective[iss]  = obj_um_chl; 		}
 		else if (strcmp( gv.SS_list[iss], "anth") == 0){
-			SS_objective[iss]  = obj_ev_anth; 		}
+			SS_objective[iss]  = obj_um_anth; 		}
 		else if (strcmp( gv.SS_list[iss], "spi")  == 0){
-			SS_objective[iss]  = obj_ev_spi; 		}
+			SS_objective[iss]  = obj_um_spi; 		}
 		else if (strcmp( gv.SS_list[iss], "opx") == 0){
-			SS_objective[iss]  = obj_ev_opx; 		}
+			SS_objective[iss]  = obj_um_opx; 		}
 		else if (strcmp( gv.SS_list[iss], "po") == 0){
-			SS_objective[iss]  = obj_ev_po; 		}
+			SS_objective[iss]  = obj_um_po; 		}
 		else{
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", gv.SS_list[iss]);	
 		}	
@@ -1167,7 +1167,7 @@ void run_simplex_levelling(				bulk_info 	 		 z_b,
 	}
 	else if (gv.EM_database == 4){
 		for (iss = 0; iss < gv.len_ss; iss++){
-			SS_ev_pc_init_function(			SS_pc_xeos, 
+			SS_um_pc_init_function(			SS_pc_xeos, 
 											iss,
 											gv.SS_list[iss]				);
 		}
@@ -1253,7 +1253,7 @@ void run_localMinimization(				bulk_info 	 		 z_b,
 	}
 	else if (gv.EM_database == 4){
 		for (ss = 0; ss < gv.len_ss; ss++){
-			SS_ev_pc_init_function(			SS_pc_xeos, 
+			SS_um_pc_init_function(			SS_pc_xeos, 
 											ss,
 											gv.SS_list[ss]				);
 		}

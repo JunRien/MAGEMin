@@ -1,7 +1,7 @@
 /**
     Endmember to xeos for atg
 */
-void p2x_ev_atg(void *SS_ref_db, double eps){
+void p2x_um_atg(void *SS_ref_db, double eps){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     
     d->iguess[0]  = (3.0*d->p[1] + d->p[2])/(d->p[0] + d->p[1] + d->p[2] + 2.0);

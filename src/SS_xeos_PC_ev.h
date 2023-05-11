@@ -1,5 +1,5 @@
-#ifndef __PC_XEOS_EV_H_
-#define __PC_XEOS_EV_H_
+#ifndef __PC_XEOS_um_H_
+#define __PC_XEOS_um_H_
 
 #include "MAGEMin.h"
 
@@ -7420,7 +7420,7 @@ struct ss_pc ev_po_pc_xeos[10] = {
 {{0.800100}},
 {{0.900100}}};
 
-void SS_ev_pc_init_function(	PC_ref 	*SS_pc_xeos,
+void SS_um_pc_init_function(	PC_ref 	*SS_pc_xeos,
 							    int 	 iss,
 							    char 	*name				){	
 						 

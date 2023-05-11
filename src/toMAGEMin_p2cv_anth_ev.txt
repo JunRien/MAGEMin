@@ -1,7 +1,7 @@
 /**
     Endmember to xeos for anth
 */
-void p2x_ev_anth(void *SS_ref_db, double eps){
+void p2x_um_anth(void *SS_ref_db, double eps){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     
     d->iguess[0]   =  (2*(1-d->p[0]-d->p[1]-d->p[2]-d->p[3]-d->p[4])+5*d->p[5]+2*d->p[6]+3*d->p[7])/(7-2*(d->p[1]+0.5*d->p[2]+2*d->p[3]+d->p[4]));

@@ -3988,7 +3988,7 @@ SS_ref G_SS_ig_spn_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
 /**
    retrieve reference thermodynamic data for ev_fluid
 */
-SS_ref G_SS_ev_fluid_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_fluid_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4037,7 +4037,7 @@ SS_ref G_SS_ev_fluid_function(SS_ref SS_ref_db, int EM_database, int len_ox, bul
 /**
    retrieve reference thermodynamic data for ev_ol
 */
-SS_ref G_SS_ev_ol_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_ol_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4089,7 +4089,7 @@ SS_ref G_SS_ev_ol_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
 /**
    retrieve reference thermodynamic data for ev_br
 */
-SS_ref G_SS_ev_br_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_br_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4146,7 +4146,7 @@ SS_ref G_SS_ev_br_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
 /**
    retrieve reference thermodynamic data for ev_ch
 */
-SS_ref G_SS_ev_ch_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_ch_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4206,7 +4206,7 @@ SS_ref G_SS_ev_ch_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
 /**
    retrieve reference thermodynamic data for ev_atg
 */
-SS_ref G_SS_ev_atg_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_atg_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4308,7 +4308,7 @@ SS_ref G_SS_ev_atg_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
 /**
    retrieve reference thermodynamic data for ev_g
 */
-SS_ref G_SS_ev_g_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_g_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4360,7 +4360,7 @@ SS_ref G_SS_ev_g_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_in
 /**
    retrieve reference thermodynamic data for ev_ta
 */
-SS_ref G_SS_ev_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4470,7 +4470,7 @@ SS_ref G_SS_ev_ta_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_i
 /**
    retrieve reference thermodynamic data for ev_chl
 */
-SS_ref G_SS_ev_chl_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_chl_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4607,7 +4607,7 @@ SS_ref G_SS_ev_chl_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
 /**
    retrieve reference thermodynamic data for ev_anth
 */
-SS_ref G_SS_ev_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4745,7 +4745,7 @@ SS_ref G_SS_ev_anth_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk
 /**
    retrieve reference thermodynamic data for ev_spi
 */
-SS_ref G_SS_ev_spi_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_spi_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4810,7 +4810,7 @@ SS_ref G_SS_ev_spi_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
 /**
    retrieve reference thermodynamic data for ev_opx
 */
-SS_ref G_SS_ev_opx_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_opx_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -4904,7 +4904,7 @@ SS_ref G_SS_ev_opx_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_
 /**
    retrieve reference thermodynamic data for ev_po
 */
-SS_ref G_SS_ev_po_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
+SS_ref G_SS_um_po_function(SS_ref SS_ref_db, int EM_database, int len_ox, bulk_info z_b, double eps){
     
     int i, j;
     int n_em = SS_ref_db.n_em;
@@ -5253,7 +5253,7 @@ SS_ref G_SS_mp_EM_function(		global_variable 	 gv,
 /**
   checks if it can satisfy the mass constraint
 */
-SS_ref G_SS_ev_EM_function(		global_variable 	 gv,
+SS_ref G_SS_um_EM_function(		global_variable 	 gv,
 								SS_ref 				 SS_ref_db, 
 								int 				 EM_database, 
 								bulk_info 	 		 z_b, 
@@ -5282,57 +5282,57 @@ SS_ref G_SS_ev_EM_function(		global_variable 	 gv,
 			if (z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_fluid_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+			SS_ref_db  = G_SS_um_fluid_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "br") == 0){
 			// if no H2O, deactivate
 			if (z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_br_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+			SS_ref_db  = G_SS_um_br_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "ol") == 0){
-			SS_ref_db  = G_SS_ev_ol_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
+			SS_ref_db  = G_SS_um_ol_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
 		else if (strcmp( name, "ch") == 0){
 			// if no h2O, deactivate
 			if (z_b.bulk_rock[8] == 0. || z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_ch_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+			SS_ref_db  = G_SS_um_ch_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "atg") == 0){
 			// if no H2O, deactivate
 			if (z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_atg_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}		
+			SS_ref_db  = G_SS_um_atg_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}		
 		else if (strcmp( name, "g") == 0){
-			SS_ref_db  = G_SS_ev_g_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);		}
+			SS_ref_db  = G_SS_um_g_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);		}
 		else if (strcmp( name, "ta") == 0){
 			// if no H2O, deactivate
 			if (z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_ta_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
+			SS_ref_db  = G_SS_um_ta_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
 		else if (strcmp( name, "po") == 0){
 			// if no S, deactivate
 			if (z_b.bulk_rock[7] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_po_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+			SS_ref_db  = G_SS_um_po_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "chl") == 0){
 			// if no H2O, deactivate
 			if (z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_chl_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
+			SS_ref_db  = G_SS_um_chl_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
 		else if (strcmp( name, "anth") == 0){
 			// if no H2O, deactivate
 			if (z_b.bulk_rock[10] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
-			SS_ref_db  = G_SS_ev_anth_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
+			SS_ref_db  = G_SS_um_anth_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
 		else if (strcmp( name, "opx") == 0){
-			SS_ref_db  = G_SS_ev_opx_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+			SS_ref_db  = G_SS_um_opx_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "spi") == 0){
-			SS_ref_db  = G_SS_ev_spi_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
+			SS_ref_db  = G_SS_um_spi_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else{
 			printf("\nsolid solution '%s' is not in the database\n",name);	}	
 		

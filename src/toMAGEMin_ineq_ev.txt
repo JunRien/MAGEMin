@@ -1,7 +1,7 @@
 /**
     Inequality constraints for fluid
 */
-void fluid_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void fluid_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + -1.0*x[0]);
     result[1] = ( eps_sf + x[0] - 1.0);
 
@@ -16,7 +16,7 @@ void fluid_ev_c(unsigned m, double *result, unsigned n, const double *x, double 
 /**
     Inequality constraints for ol
 */
-void ol_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void ol_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + x[0] - 1.0);
     result[1] = ( eps_sf + -1.0*x[0]);
 
@@ -31,7 +31,7 @@ void ol_ev_c(unsigned m, double *result, unsigned n, const double *x, double *gr
 /**
     Inequality constraints for br
 */
-void br_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void br_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + x[0] - 1.0);
     result[1] = ( eps_sf + -1.0*x[0]);
 
@@ -46,7 +46,7 @@ void br_ev_c(unsigned m, double *result, unsigned n, const double *x, double *gr
 /**
     Inequality constraints for ch
 */
-void ch_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void ch_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + x[0] - 1.0);
     result[1] = ( eps_sf + -1.0*x[0]);
 
@@ -61,7 +61,7 @@ void ch_ev_c(unsigned m, double *result, unsigned n, const double *x, double *gr
 /**
     Inequality constraints for atg
 */
-void atg_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void atg_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + -1.0*x[0]*x[1] - 1.0*x[0]*x[2] + x[0] + x[1]*x[3] + x[1] + x[2]*x[3] + x[2] - 1.0*x[3] - 1.0);
     result[1] = ( eps_sf + x[0]*x[1] + x[0]*x[2] - 1.0*x[0] - 1.0*x[1]*x[3] - 1.0*x[2]*x[3] + x[3]);
     result[2] = ( eps_sf + -1.0*x[2]);
@@ -112,7 +112,7 @@ void atg_ev_c(unsigned m, double *result, unsigned n, const double *x, double *g
 /**
     Inequality constraints for g
 */
-void g_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void g_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + x[0] - 1.0);
     result[1] = ( eps_sf + -1.0*x[0]);
 
@@ -127,7 +127,7 @@ void g_ev_c(unsigned m, double *result, unsigned n, const double *x, double *gra
 /**
     Inequality constraints for ta
 */
-void ta_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void ta_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + -1.0*x[0]*x[3] + x[0] + x[3]*x[4] + x[3] - 1.0*x[4] - 1.0);
     result[1] = ( eps_sf + x[0]*x[3] - 1.0*x[0] - 1.0*x[3]*x[4] + x[4]);
     result[2] = ( eps_sf + -1.0*x[3]);
@@ -192,7 +192,7 @@ void ta_ev_c(unsigned m, double *result, unsigned n, const double *x, double *gr
 /**
     Inequality constraints for chl
 */
-void chl_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void chl_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + -1.0*x[0]*x[1] - 1.0*x[0]*x[3] + x[0]*x[4] + x[0] + x[1]*x[5] + x[1] + x[3]*x[5] + x[3] - 1.0*x[4]*x[5] - 1.0*x[4] - 1.0*x[5] - 1.0);
     result[1] = ( eps_sf + -1.0*x[3]);
     result[2] = ( eps_sf + x[0]*x[1] + x[0]*x[3] - 1.0*x[0]*x[4] - 1.0*x[0] - 1.0*x[1]*x[5] - 1.0*x[3]*x[5] + x[4]*x[5] + x[5]);
@@ -307,7 +307,7 @@ void chl_ev_c(unsigned m, double *result, unsigned n, const double *x, double *g
 /**
     Inequality constraints for anth
 */
-void anth_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void anth_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + x[3] - 1.0);
     result[1] = ( eps_sf + -1.0*x[3]);
     result[2] = ( eps_sf + -1.0*x[4]);
@@ -422,7 +422,7 @@ void anth_ev_c(unsigned m, double *result, unsigned n, const double *x, double *
 /**
     Inequality constraints for spi
 */
-void spi_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void spi_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + -1.0*x[1]);
     result[1] = ( eps_sf + x[1] - 1.0);
     result[2] = ( eps_sf + x[0] - 1.0);
@@ -445,7 +445,7 @@ void spi_ev_c(unsigned m, double *result, unsigned n, const double *x, double *g
 /**
     Inequality constraints for opx
 */
-void opx_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void opx_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + -1.0*x[0]*x[1] - 1.0*x[0]*x[2] + x[0] + x[1] + x[2] - 0.5*x[3] - 1.0);
     result[1] = ( eps_sf + x[0]*x[1] + x[0]*x[2] - 1.0*x[0] + 0.5*x[3]);
     result[2] = ( eps_sf + -1.0*x[2]);
@@ -496,7 +496,7 @@ void opx_ev_c(unsigned m, double *result, unsigned n, const double *x, double *g
 /**
     Inequality constraints for po
 */
-void po_ev_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
+void po_um_c(unsigned m, double *result, unsigned n, const double *x, double *grad, void *data){
     result[0] = ( eps_sf + x[0] - 1.0);
     result[1] = ( eps_sf + -1.0*x[0]);
 

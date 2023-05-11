@@ -170,6 +170,9 @@ int runMAGEMin(			int    argc,
 	else if (gv.EM_database == 2){
 		gv = get_bulk_igneous( gv );
 	}
+	else if (gv.EM_database == 4){
+		gv = get_bulk_ultramafic( gv );
+	}
 	else{
 		printf(" Wrong database...\n");
 	}
@@ -672,7 +675,10 @@ int runMAGEMin(			int    argc,
 		SS_ig_objective_init_function(			SS_objective,
 												gv							);
 	}
-
+	else if (EM_database == 4){			// Igneous database //
+		SS_um_objective_init_function(			SS_objective,
+												gv							);
+	}
 
 	/* initialize endmember database for given P-T point */
 	gv = init_em_db(		EM_database,

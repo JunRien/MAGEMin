@@ -1,7 +1,7 @@
 /**
     Endmember to xeos for chl
 */
-void p2x_ev_chl(void *SS_ref_db, double eps){
+void p2x_um_chl(void *SS_ref_db, double eps){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     
     d->iguess[2]   =  d->p[6];

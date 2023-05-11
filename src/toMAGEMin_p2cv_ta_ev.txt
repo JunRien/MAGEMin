@@ -1,7 +1,7 @@
 /**
     Endmember to xeos for ta
 */
-void p2x_ev_ta(void *SS_ref_db, double eps){
+void p2x_um_ta(void *SS_ref_db, double eps){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     
     d->iguess[0]  = (3*d->p[1]+2*d->p[2])/(1+2*(d->p[0]+d->p[1]+d->p[2])+d->p[3]+d->p[4]-d->p[5]);

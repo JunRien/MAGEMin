@@ -2,7 +2,7 @@
 /**
     Update dpdx matrix of fluid
 */
-void dpdx_ev_fluid(void *SS_ref_db, const double *x){
+void dpdx_um_fluid(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -14,7 +14,7 @@ void dpdx_ev_fluid(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of ol
 */
-void dpdx_ev_ol(void *SS_ref_db, const double *x){
+void dpdx_um_ol(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -26,7 +26,7 @@ void dpdx_ev_ol(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of br
 */
-void dpdx_ev_br(void *SS_ref_db, const double *x){
+void dpdx_um_br(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -38,7 +38,7 @@ void dpdx_ev_br(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of ch
 */
-void dpdx_ev_ch(void *SS_ref_db, const double *x){
+void dpdx_um_ch(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -50,7 +50,7 @@ void dpdx_ev_ch(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of atg
 */
-void dpdx_ev_atg(void *SS_ref_db, const double *x){
+void dpdx_um_atg(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -65,7 +65,7 @@ void dpdx_ev_atg(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of g
 */
-void dpdx_ev_g(void *SS_ref_db, const double *x){
+void dpdx_um_g(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -77,7 +77,7 @@ void dpdx_ev_g(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of ta
 */
-void dpdx_ev_ta(void *SS_ref_db, const double *x){
+void dpdx_um_ta(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -93,7 +93,7 @@ void dpdx_ev_ta(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of chl
 */
-void dpdx_ev_chl(void *SS_ref_db, const double *x){
+void dpdx_um_chl(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -111,7 +111,7 @@ void dpdx_ev_chl(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of anth
 */
-void dpdx_ev_anth(void *SS_ref_db, const double *x){
+void dpdx_um_anth(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -129,7 +129,7 @@ void dpdx_ev_anth(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of spi
 */
-void dpdx_ev_spi(void *SS_ref_db, const double *x){
+void dpdx_um_spi(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -142,7 +142,7 @@ void dpdx_ev_spi(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of opx
 */
-void dpdx_ev_opx(void *SS_ref_db, const double *x){
+void dpdx_um_opx(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
@@ -157,7 +157,7 @@ void dpdx_ev_opx(void *SS_ref_db, const double *x){
 /**
     Update dpdx matrix of po
 */
-void dpdx_ev_po(void *SS_ref_db, const double *x){
+void dpdx_um_po(void *SS_ref_db, const double *x){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     double **dp_dx = d->dp_dx;
 
