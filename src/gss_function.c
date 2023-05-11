@@ -5303,13 +5303,13 @@ SS_ref G_SS_um_EM_function(		global_variable 	 gv,
 
 		if (strcmp( name, "fluid") == 0 ){
 			// if no H2O, deactivate
-			if (z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_fluid_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "br") == 0){
 			// if no H2O, deactivate
-			if (z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_br_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
@@ -5317,13 +5317,13 @@ SS_ref G_SS_um_EM_function(		global_variable 	 gv,
 			SS_ref_db  = G_SS_um_ol_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
 		else if (strcmp( name, "ch") == 0){
 			// if no h2O, deactivate
-			if (z_b.bulk_rock[8] == 0. || z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_ch_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "atg") == 0){
 			// if no H2O, deactivate
-			if (z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_atg_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}		
@@ -5331,7 +5331,7 @@ SS_ref G_SS_um_EM_function(		global_variable 	 gv,
 			SS_ref_db  = G_SS_um_g_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);		}
 		else if (strcmp( name, "ta") == 0){
 			// if no H2O, deactivate
-			if (z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_ta_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
@@ -5343,13 +5343,13 @@ SS_ref G_SS_um_EM_function(		global_variable 	 gv,
 			SS_ref_db  = G_SS_um_po_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}
 		else if (strcmp( name, "chl") == 0){
 			// if no H2O, deactivate
-			if (z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_chl_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	
 		else if (strcmp( name, "anth") == 0){
 			// if no H2O, deactivate
-			if (z_b.bulk_rock[10] == 0.){
+			if (z_b.bulk_rock[5] == 0.){
 				SS_ref_db.ss_flags[0]  = 0;
 			}
 			SS_ref_db  = G_SS_um_anth_function(SS_ref_db, EM_database, gv.len_ox, z_b, eps);	}	

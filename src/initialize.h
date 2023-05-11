@@ -18,6 +18,9 @@ struct EM_db Access_EM_DB(int id, int EM_database) {
 	else if (EM_database == 2){		
 		Entry_EM = arr_em_db_tc_ds634[id]; 
 	}
+	else if (EM_database == 4){		
+		Entry_EM = arr_em_db_tc_ds634[id]; 
+	}
 	else{
 		printf(" Wrong database, values should be 0, metapelite; 1, metabasite; 2, igneous\n");
 		printf(" -> using default igneous database to avoid ugly crash\n");
