@@ -236,7 +236,7 @@ char** get_EM_DB_names(						global_variable gv		);
 /** store endmember database **/
 struct EM_db {
 	char   Name[20];			/** pure species name 														*/
-    double Comp[12];       	 	/** pure species composition [0-10] + number of atom [11] 					*/
+    double Comp[15];       	 	/** pure species composition [0-10] + number of atom [11] 					*/
     double input_1[3];          /** first line of the thermodynamics datable 								*/
     double input_2[4];          /** second line of the thermodynamics datable 								*/
     double input_3[11];         /** third line of the thermodynamics datable 								*/

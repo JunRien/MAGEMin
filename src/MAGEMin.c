@@ -44,6 +44,7 @@ Imported libraries
 #include "nlopt.h"                  // requires specifying this in the makefile
 #include "mpi.h"
 #include "Endmembers_tc-ds62.h"
+#include "Endmembers_tc-ds633.h"
 #include "Endmembers_tc-ds634.h"
 #include "toolkit.h"
 #include "io_function.h"

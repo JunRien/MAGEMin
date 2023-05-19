@@ -58,6 +58,9 @@ void p2x_um_anth( SS_ref SS_ref_db, double eps);
 void p2x_um_spi(  SS_ref SS_ref_db, double eps);
 void p2x_um_opx(  SS_ref SS_ref_db, double eps);
 void p2x_um_po( SS_ref SS_ref_db, double eps);
+void p2x_um_aphs(  SS_ref SS_ref_db, double eps);
+void p2x_um_fluidb(  SS_ref SS_ref_db, double eps);
+void p2x_um_occm( SS_ref SS_ref_db, double eps);
 
 double obj_ig_bi(unsigned   n, const double *x, double *grad, void *SS_ref_db);
 double obj_ig_cd(unsigned   n, const double *x, double *grad, void *SS_ref_db);
@@ -104,7 +107,9 @@ double obj_um_anth(unsigned  n, const double *x, double *grad, void *SS_ref_db);
 double obj_um_spi(unsigned   n, const double *x, double *grad, void *SS_ref_db);
 double obj_um_opx(unsigned   n, const double *x, double *grad, void *SS_ref_db);
 double obj_um_po(unsigned  n, const double *x, double *grad, void *SS_ref_db);
-
+double obj_um_aphs(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_um_fluidb(unsigned   n, const double *x, double *grad, void *SS_ref_db);
+double obj_um_occm(unsigned  n, const double *x, double *grad, void *SS_ref_db);
 
 SS_ref PC_function(			global_variable 	 gv,
 							SS_ref 				 SS_ref_db, 

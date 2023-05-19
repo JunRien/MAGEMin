@@ -334,7 +334,50 @@ SS_ref G_SS_um_po_init_function(SS_ref SS_ref_db, int EM_database, global_variab
     return SS_ref_db;
 }
 
+/**
+    allocate memory for fluidb
+*/
+SS_ref G_SS_um_fluidb_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+    SS_ref_db.is_liq    = 0;
+    SS_ref_db.symmetry  = -1;
+    SS_ref_db.n_sf      = 2;
+    SS_ref_db.n_em      = 2;
+    SS_ref_db.n_xeos    = 1;
+    SS_ref_db.CstFactor = 0;
+    
+    return SS_ref_db;
+}
 
+/**
+    allocate memory for occm
+*/
+SS_ref G_SS_um_occm_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+    
+    SS_ref_db.is_liq    = 0;
+    SS_ref_db.symmetry  = 0;
+    SS_ref_db.n_sf      = 9;
+    SS_ref_db.n_em      = 5;
+    SS_ref_db.n_v       = 5;
+    SS_ref_db.n_w       = 10;
+    SS_ref_db.n_xeos    = 4;
+    SS_ref_db.CstFactor = 0;
+
+    return SS_ref_db;
+}
+
+/**
+    allocate memory for aphs
+*/
+SS_ref G_SS_um_aphs_init_function(SS_ref SS_ref_db, int EM_database, global_variable gv){
+    SS_ref_db.is_liq    = 0;
+    SS_ref_db.symmetry  = -1;
+    SS_ref_db.n_sf      = 2;
+    SS_ref_db.n_em      = 2;
+    SS_ref_db.n_xeos    = 1;
+    SS_ref_db.CstFactor = 0;
+    
+    return SS_ref_db;
+}
 
 /**************************************************************************************/
 /**************************************************************************************/
@@ -939,17 +982,17 @@ SS_ref G_SS_init_EM_function(		int			 		 ph_id,
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", name);	
 		}	
 	}
-	else if (EM_database == 4) {	 //"fluid","ol","br","ch","atg","g","ta","chl","anth","spi","opx","po"	
+	else if (EM_database == 4) {	 //"fluid","ol","br","ch","atg","g","ta","chl","anth","spi","opx","po","aphs","fluidb","occm"		
 		if      (strcmp( name, "fluid")  == 0 ){
-			SS_ref_db  = G_SS_um_fluid_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_fluid_init_function(SS_ref_db, EM_database, gv); 	}
 		else if (strcmp( name, "ol")  == 0){
 			SS_ref_db  = G_SS_um_ol_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "br") == 0){
-			SS_ref_db  = G_SS_um_br_init_function(SS_ref_db, EM_database, gv); 	}	
+			SS_ref_db  = G_SS_um_br_init_function(SS_ref_db, EM_database, gv); 		}	
 		else if (strcmp( name, "ch")  == 0){
 			SS_ref_db  = G_SS_um_ch_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "atg")  == 0){
-			SS_ref_db  = G_SS_um_atg_init_function(SS_ref_db, EM_database, gv); 		}		
+			SS_ref_db  = G_SS_um_atg_init_function(SS_ref_db, EM_database, gv); 	}		
 		else if (strcmp( name, "g")   == 0){
 			SS_ref_db  = G_SS_um_g_init_function(SS_ref_db, EM_database, gv); 		}
 		else if (strcmp( name, "ta")  == 0){
@@ -959,11 +1002,17 @@ SS_ref G_SS_init_EM_function(		int			 		 ph_id,
 		else if (strcmp( name, "anth") == 0){
 			SS_ref_db  = G_SS_um_anth_init_function(SS_ref_db, EM_database, gv); 	}
 		else if (strcmp( name, "spi")  == 0){
-			SS_ref_db  = G_SS_um_spi_init_function(SS_ref_db, EM_database, gv); 		}	
+			SS_ref_db  = G_SS_um_spi_init_function(SS_ref_db, EM_database, gv); 	}	
 		else if (strcmp( name, "opx")  == 0){
-			SS_ref_db  = G_SS_um_opx_init_function(SS_ref_db, EM_database, gv); 		}
+			SS_ref_db  = G_SS_um_opx_init_function(SS_ref_db, EM_database, gv); 	}
 		else if (strcmp( name, "po") == 0){
-			SS_ref_db  = G_SS_um_po_init_function(SS_ref_db, EM_database, gv); 	}
+			SS_ref_db  = G_SS_um_po_init_function(SS_ref_db, EM_database, gv); 		}
+		else if (strcmp( name, "aphs")  == 0){
+			SS_ref_db  = G_SS_um_aphs_init_function(SS_ref_db, EM_database, gv); 	}	
+		else if (strcmp( name, "fluidb")  == 0){
+			SS_ref_db  = G_SS_um_fluidb_init_function(SS_ref_db, EM_database, gv); 	}
+		else if (strcmp( name, "occm") == 0){
+			SS_ref_db  = G_SS_um_occm_init_function(SS_ref_db, EM_database, gv); 		}
 		else{
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", name);	
 		}	

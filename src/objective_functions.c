@@ -183,8 +183,44 @@ void dpdx_um_po(void *SS_ref_db, const double *x){
     dp_dx[1][0] = -8.00000000000000;      
 }
 
+/**
+    Update dpdx matrix of fluidb
+*/
+void dpdx_um_fluidb(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
 
-//-----------------------px for ev------------------- 
+    dp_dx[0][0] = -1.00000000000000;      
+    dp_dx[1][0] = 1.00000000000000;      
+}
+
+/**
+    Update dpdx matrix of occm
+*/
+void dpdx_um_occm(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      dp_dx[0][1] = -1.00000000000000;      dp_dx[0][2] = -0.500000000000000;      dp_dx[0][3] = 0.0;      
+    dp_dx[1][0] = 0.0;      dp_dx[1][1] = 0.0;      dp_dx[1][2] = 1.00000000000000;      dp_dx[1][3] = -1.00000000000000;      
+    dp_dx[2][0] = 1.00000000000000;      dp_dx[2][1] = 0.0;      dp_dx[2][2] = -0.500000000000000;      dp_dx[2][3] = 0.250000000000000;      
+    dp_dx[3][0] = 0.0;      dp_dx[3][1] = 1.00000000000000;      dp_dx[3][2] = 0.0;      dp_dx[3][3] = -0.250000000000000;      
+    dp_dx[4][0] = 0.0;      dp_dx[4][1] = 0.0;      dp_dx[4][2] = 0.0;      dp_dx[4][3] = 1.00000000000000;      
+}
+
+/**
+    Update dpdx matrix of aphs
+*/
+void dpdx_um_aphs(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double **dp_dx = d->dp_dx;
+
+    dp_dx[0][0] = -1.00000000000000;      
+    dp_dx[1][0] = 1.00000000000000;      
+}
+
+
+//-----------------------px for um------------------- 
 //--------------------------------------------------- 
 
     
@@ -342,9 +378,44 @@ void px_um_po(void *SS_ref_db, const double *x){
         p[1]           = 1.0 - 8.0*x[0];
 }
 
+/**
+    Endmember fraction of fluidb
+*/
+void px_um_fluidb(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double *p = d->p;
+        p[0]           = 1.0 - 1.0*x[0];
+        p[1]           = x[0];
+}
+
+    
+/**
+    Endmember fraction of occm
+*/
+void px_um_occm(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double *p = d->p;
+        p[0]           = -1.0*x[0] - 1.0*x[1] - 0.5*x[2] + 1.0;
+        p[1]           = x[2] - 1.0*x[3];
+        p[2]           = x[0] - 0.5*x[2] + 0.25*x[3];
+        p[3]           = x[1] - 0.25*x[3];
+        p[4]           = x[3];
+}
+
+    
+/**
+    Endmember fraction of aphs
+*/
+void px_um_aphs(void *SS_ref_db, const double *x){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    double *p = d->p;
+        p[0]           = 1.0 - 1.0*x[0];
+        p[1]           = x[0];
+}
 
 
-//-----------------------obj for ev------------------- 
+
+//-----------------------obj for um------------------- 
 //--------------------------------------------------- 
 
     
@@ -1149,6 +1220,194 @@ double obj_um_po(unsigned n, const double *x, double *grad, void *SS_ref_db){
     return d->df;
 }
 
+/**
+    Objective function of fluidb
+*/
+double obj_um_fluidb(unsigned n, const double *x, double *grad, void *SS_ref_db){
+    SS_ref *d         = (SS_ref *) SS_ref_db;
+
+    int n_em          = d->n_em;
+    double P          = d->P;
+    double T          = d->T;
+    double R          = d->R;
+
+    double *gb        = d->gb_lvl;
+    double *mu_Gex    = d->mu_Gex;
+    double *sf        = d->sf;
+    double *mu        = d->mu;
+    px_um_fluidb(SS_ref_db,x);
+
+    
+    sf[0]          = 1.0 - x[0];
+    sf[1]          = 1.0*x[0];
+    
+    
+    mu[0]          = gb[0] + R*T*creal(clog(sf[0]));
+    mu[1]          = gb[1] + R*T*creal(clog(sf[1]));
+    
+    d->sum_apep = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->sum_apep += d->ape[i]*d->p[i];
+    }
+    d->factor = d->fbc/d->sum_apep;
+
+    d->df_raw = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->df_raw += mu[i]*d->p[i];
+    }
+    d->df = d->df_raw * d->factor;
+
+    if (grad){
+        double *dfx    = d->dfx;
+        double **dp_dx = d->dp_dx;
+        dpdx_um_fluidb(SS_ref_db,x);
+        for (int i = 0; i < (d->n_xeos); i++){
+            dfx[i] = 0.0;
+            for (int j = 0; j < n_em; j++){
+                dfx[i] += (mu[j] - (d->ape[j]/d->sum_apep)*d->df_raw)*d->factor*dp_dx[j][i];
+            }
+            grad[i] = creal(dfx[i]);
+        }
+    }
+
+    return d->df;
+}
+    
+/**
+    Objective function of occm
+*/
+double obj_um_occm(unsigned n, const double *x, double *grad, void *SS_ref_db){
+    SS_ref *d         = (SS_ref *) SS_ref_db;
+
+    int n_em          = d->n_em;
+    double P          = d->P;
+    double T          = d->T;
+    double R          = d->R;
+
+    double *gb        = d->gb_lvl;
+    double *mat_phi   = d->mat_phi;
+    double *mu_Gex    = d->mu_Gex;
+    double *sf        = d->sf;
+    double *mu        = d->mu;
+    px_um_occm(SS_ref_db,x);
+
+    d->sum_v = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->sum_v += d->p[i]*d->v[i];
+    }
+    for (int i = 0; i < n_em; i++){
+        d->mat_phi[i] = (d->p[i]*d->v[i])/d->sum_v;
+    }
+    
+    for (int i = 0; i < d->n_em; i++){
+        mu_Gex[i] = 0.0;
+        int it = 0;
+        for (int j = 0; j < d->n_xeos; j++){
+            for (int k = j+1; k < d->n_em; k++){
+                mu_Gex[i] -= (d->eye[i][j] - d->mat_phi[j])*(d->eye[i][k] - d->mat_phi[k])*(d->W[it]*2.0*d->v[i]/(d->v[j]+d->v[k]));
+                it += 1;
+            }
+        }
+    }
+    
+    sf[0]          = -x[0] - x[1] + 0.5*x[2] + 1.0;
+    sf[1]          = 1.0*x[0] - 0.5*x[2] + 0.25*x[3];
+    sf[2]          = 1.0*x[1] - 0.25*x[3];
+    sf[3]          = -x[0] - x[1] - 0.5*x[2] + 1.0;
+    sf[4]          = 1.0*x[0] + 0.5*x[2] - 0.75*x[3];
+    sf[5]          = 1.0*x[1] + 0.75*x[3];
+    sf[6]          = -x[0] - x[1] - 0.5*x[2] + 1.0;
+    sf[7]          = 1.0*x[0] + 0.5*x[2] + 0.25*x[3];
+    sf[8]          = 1.0*x[1] - 0.25*x[3];
+    
+    
+    mu[0]          = gb[0] + R*T*creal(clog(0.25*sqrt(sf[0])*cpow(sf[3], 0.25)*sf[6])) + mu_Gex[0];
+    mu[1]          = gb[1] + R*T*creal(clog(0.25*sqrt(sf[0])*cpow(sf[4], 0.25)*sf[7])) + mu_Gex[1];
+    mu[2]          = gb[2] + R*T*creal(clog(0.25*sqrt(sf[1])*cpow(sf[4], 0.25)*sf[7])) + mu_Gex[2];
+    mu[3]          = gb[3] + R*T*creal(clog(0.25*sqrt(sf[2])*cpow(sf[5], 0.25)*sf[8])) + mu_Gex[3];
+    mu[4]          = gb[4] + R*T*creal(clog(0.25*sqrt(sf[0])*cpow(sf[5], 0.25)*sf[7])) + mu_Gex[4];
+    
+    d->sum_apep = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->sum_apep += d->ape[i]*d->p[i];
+    }
+    d->factor = d->fbc/d->sum_apep;
+
+    d->df_raw = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->df_raw += mu[i]*d->p[i];
+    }
+    d->df = d->df_raw * d->factor;
+
+    if (grad){
+        double *dfx    = d->dfx;
+        double **dp_dx = d->dp_dx;
+        dpdx_um_occm(SS_ref_db,x);
+        for (int i = 0; i < (d->n_xeos); i++){
+            dfx[i] = 0.0;
+            for (int j = 0; j < n_em; j++){
+                dfx[i] += (mu[j] - (d->ape[j]/d->sum_apep)*d->df_raw)*d->factor*dp_dx[j][i];
+            }
+            grad[i] = creal(dfx[i]);
+        }
+    }
+
+    return d->df;
+}
+    
+/**
+    Objective function of aphs
+*/
+double obj_um_aphs(unsigned n, const double *x, double *grad, void *SS_ref_db){
+    SS_ref *d         = (SS_ref *) SS_ref_db;
+
+    int n_em          = d->n_em;
+    double P          = d->P;
+    double T          = d->T;
+    double R          = d->R;
+
+    double *gb        = d->gb_lvl;
+    double *mu_Gex    = d->mu_Gex;
+    double *sf        = d->sf;
+    double *mu        = d->mu;
+    px_um_aphs(SS_ref_db,x);
+
+    
+    sf[0]          = 1.0 - x[0];
+    sf[1]          = 1.0*x[0];
+    
+    
+    mu[0]          = gb[0] + R*T*creal(clog(cpow(sf[0], 7.0)));
+    mu[1]          = gb[1] + R*T*creal(clog(cpow(sf[1], 7.0)));
+    
+    d->sum_apep = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->sum_apep += d->ape[i]*d->p[i];
+    }
+    d->factor = d->fbc/d->sum_apep;
+
+    d->df_raw = 0.0;
+    for (int i = 0; i < n_em; i++){
+        d->df_raw += mu[i]*d->p[i];
+    }
+    d->df = d->df_raw * d->factor;
+
+    if (grad){
+        double *dfx    = d->dfx;
+        double **dp_dx = d->dp_dx;
+        dpdx_um_aphs(SS_ref_db,x);
+        for (int i = 0; i < (d->n_xeos); i++){
+            dfx[i] = 0.0;
+            for (int j = 0; j < n_em; j++){
+                dfx[i] += (mu[j] - (d->ape[j]/d->sum_apep)*d->df_raw)*d->factor*dp_dx[j][i];
+            }
+            grad[i] = creal(dfx[i]);
+        }
+    }
+
+    return d->df;
+}
+
 
 //-----------------------p2x for ev------------------- 
 //--------------------------------------------------- 
@@ -1295,8 +1554,8 @@ void p2x_um_chl(void *SS_ref_db, double eps){
     
     d->iguess[2]   =  d->p[6];
     d->iguess[3]   =  d->p[7];
-    d->iguess[4] = (1.0 -d->p[1] - d->p[2] - d->p[4] - d->p[5] - d->p[6])/2.0;
-    d->iguess[1]   = (1.0 -d->p[1] + d->p[2] - d->p[4] - d->p[5] - d->p[6])/2.0;
+    d->iguess[4] = (d->p[0] + d->p[3] + d->p[7])/2.0;
+    d->iguess[1]   =  d->p[2] + d->iguess[4];
     d->iguess[0]   = (5.0*(d->p[3] + d->p[4]) + d->p[5])/(5.0 + d->p[1] - d->p[2] + d->p[4] + d->p[5] - 5.0*d->p[7]);
     d->iguess[6]  =  d->iguess[0] - d->p[4]/(d->p[1] + d->p[4] + d->p[5]);
     d->iguess[5]  =  d->iguess[0] - (d->p[3] + d->p[5])/(1 - d->p[2] - d->p[7]);
@@ -1382,6 +1641,65 @@ void p2x_um_po(void *SS_ref_db, double eps){
     SS_ref *d  = (SS_ref *) SS_ref_db;
     
     d->iguess[0]  = (1.0-d->p[1])/8.0;
+    
+    for (int i = 0; i < d->n_xeos; i++){
+        if (d->iguess[i] < d->bounds[i][0]){
+            d->iguess[i] = d->bounds[i][0];
+        }
+        if (d->iguess[i] > d->bounds[i][1]){
+            d->iguess[i] = d->bounds[i][1];
+        }
+    }
+}
+
+/**
+    Endmember to xeos for aphs
+*/
+void p2x_um_aphs(void *SS_ref_db, double eps){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    
+    d->iguess[0]  = d->p[1];
+    
+    for (int i = 0; i < d->n_xeos; i++){
+        if (d->iguess[i] < d->bounds[i][0]){
+            d->iguess[i] = d->bounds[i][0];
+        }
+        if (d->iguess[i] > d->bounds[i][1]){
+            d->iguess[i] = d->bounds[i][1];
+        }
+    }
+}
+
+
+/**
+    Endmember to xeos for fluidb
+*/
+void p2x_um_fluidb(void *SS_ref_db, double eps){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    
+    d->iguess[0]  = d->p[1];
+    
+    for (int i = 0; i < d->n_xeos; i++){
+        if (d->iguess[i] < d->bounds[i][0]){
+            d->iguess[i] = d->bounds[i][0];
+        }
+        if (d->iguess[i] > d->bounds[i][1]){
+            d->iguess[i] = d->bounds[i][1];
+        }
+    }
+}
+
+
+/**
+    Endmember to xeos for occm
+*/
+void p2x_um_occm(void *SS_ref_db, double eps){
+    SS_ref *d  = (SS_ref *) SS_ref_db;
+    
+    d->iguess[0]  = 0.5*d->p[1]+d->p[2]+0.25*d->p[4];
+    d->iguess[1]  = d->p[3]+0.25*d->p[4];
+    d->iguess[2]  = d->p[1]+d->p[4];
+    d->iguess[3]  = d->p[4];
     
     for (int i = 0; i < d->n_xeos; i++){
         if (d->iguess[i] < d->bounds[i][0]){
@@ -5618,6 +5936,15 @@ SS_ref P2X(					global_variable 	 gv,
 		else if (strcmp( name, "po") == 0){
 			p2x_um_po(&SS_ref_db, eps);
 		}
+    	else if (strcmp( name, "aphs")  == 0){
+			p2x_um_aphs(&SS_ref_db, eps);	
+		}	
+		else if (strcmp( name, "fluidb")  == 0){
+			p2x_um_fluidb(&SS_ref_db, eps);
+		}
+		else if (strcmp( name, "occm") == 0){
+			p2x_um_occm(&SS_ref_db, eps);
+		}
 		else{
 			printf("\nsolid solution '%s' is not in the database\n",name);		
 		}	
@@ -5774,6 +6101,15 @@ SS_ref PC_function(		global_variable 	 gv,
 		}
 		else if (strcmp( name, "po") == 0){
 			G0 = obj_um_po(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
+		}
+		else if (strcmp( name, "aphs")  == 0){
+			G0 = obj_um_aphs(SS_ref_db.n_xeos, SS_ref_db.iguess, 	SS_ref_db.dfx, &SS_ref_db);
+		}	
+		else if (strcmp( name, "fluidb")  == 0){
+			G0 = obj_um_fluidb(SS_ref_db.n_xeos, SS_ref_db.iguess, 	SS_ref_db.dfx, &SS_ref_db);
+		}
+		else if (strcmp( name, "occm") == 0){
+			G0 = obj_um_occm(SS_ref_db.n_xeos, SS_ref_db.iguess, SS_ref_db.dfx, &SS_ref_db);
 		}
 		else{
 			printf("\nsolid solution '%s' is not in the database\n",name);		

@@ -34,7 +34,7 @@ Levelling occurs in two stages:
 #include "PGE_function.h"
 #include "SS_xeos_PC_mp.h" 				//mp is first, it contains the structure definition
 #include "SS_xeos_PC_ig.h"
-#include "SS_xeos_PC_ev.h"
+#include "SS_xeos_PC_um.h"
 
 /**
 	associate the array of pointer with the right solution phase
@@ -152,6 +152,12 @@ void SS_um_objective_init_function(	obj_type 			*SS_objective,
 			SS_objective[iss]  = obj_um_opx; 		}
 		else if (strcmp( gv.SS_list[iss], "po") == 0){
 			SS_objective[iss]  = obj_um_po; 		}
+		else if (strcmp( gv.SS_list[iss], "aphs") == 0){
+			SS_objective[iss]  = obj_um_aphs; 		}
+		else if (strcmp( gv.SS_list[iss], "fluidb") == 0){
+			SS_objective[iss]  = obj_um_fluidb; 		}
+		else if (strcmp( gv.SS_list[iss], "occm") == 0){
+			SS_objective[iss]  = obj_um_occm; 		}
 		else{
 			printf("\nsolid solution '%s' is not in the database, cannot be initiated\n", gv.SS_list[iss]);	
 		}	

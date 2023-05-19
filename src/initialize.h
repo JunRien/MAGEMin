@@ -3,6 +3,7 @@
 
 #include "uthash.h"
 #include "Endmembers_tc-ds62.h"
+#include "Endmembers_tc-ds633.h"
 #include "Endmembers_tc-ds634.h"
 
 /* Select required thermodynamic database */
@@ -19,7 +20,7 @@ struct EM_db Access_EM_DB(int id, int EM_database) {
 		Entry_EM = arr_em_db_tc_ds634[id]; 
 	}
 	else if (EM_database == 4){		
-		Entry_EM = arr_em_db_tc_ds634[id]; 
+		Entry_EM = arr_em_db_tc_ds633[id]; 
 	}
 	else{
 		printf(" Wrong database, values should be 0, metapelite; 1, metabasite; 2, igneous\n");
@@ -85,17 +86,17 @@ char** get_EM_DB_names(global_variable gv) {
 **/
 typedef struct oxide_datas {
 	int 	n_ox;
-	char    oxName[12][20];
-	double  oxMass[12];
-	double  atPerOx[12];
+	char    oxName[14][20];
+	double  oxMass[14];
+	double  atPerOx[14];
 
 } oxide_data;
 
 oxide_data oxide_info = {
-	12,						/* number of endmembers */
-	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"K2O"	,"Na2O"	,"TiO2"	,"O"	,"MnO"	,"Cr2O3","H2O"			},
-	{60.08  ,101.96 ,56.08  ,40.30  ,71.85  ,94.2   ,61.98  ,79.88  ,16.0   ,70.937	,151.99 ,18.015			},
-	{3.0	,5.0	,2.0	,2.0	,2.0	,3.0	,3.0	,3.0	,1.0	,2.0 	,5.0	,3.0			}
+	14,						/* number of endmembers */
+	{"SiO2"	,"Al2O3","CaO"	,"MgO"	,"FeO"	,"K2O"	,"Na2O"	,"TiO2"	,"O"	,"MnO"	,"Cr2O3","H2O" ,"CO2" ,"SO2"  },
+	{60.08  ,101.96 ,56.08  ,40.30  ,71.85  ,94.2   ,61.98  ,79.88  ,16.0   ,70.937	,151.99 ,18.015,44.01 ,64.066 },
+	{3.0	,5.0	,2.0	,2.0	,2.0	,3.0	,3.0	,3.0	,1.0	,2.0 	,5.0	,3.0   ,3.0   ,3.0	  }
 };
 
 
@@ -223,11 +224,11 @@ typedef struct ultramafic_datasets {
 	int 	n_ss;
 	char    ox[6][20];
 	char    PP[15][20];
-	char    SS[12][20];
+	char    SS[15][20];
 
-	int 	verifyPC[12];
-	int 	n_SS_PC[12];
-	double 	SS_PC_stp[12];
+	int 	verifyPC[15];
+	int 	n_SS_PC[15];
+	double 	SS_PC_stp[15];
 
 	double 	PC_df_add;					/** min value of df under which the PC is added 									*/
 	double  solver_switch_T;
@@ -246,17 +247,17 @@ typedef struct ultramafic_datasets {
 } ultramafic_dataset;
 
 ultramafic_dataset ultramafic_db = {
-	256,						/* number of endmembers */
+	289,						/* number of endmembers */
 	6,							/* number of oxides */			
 	15,							/* number of pure phases */
-	12,							/* number of solution phases */
+	15,							/* number of solution phases */
 	{"SiO2"	,"Al2O3","MgO"	,"FeO"	,"O"	,"H2O"						},
 	{"q"	,"crst"	,"trd"	,"coe"	,"stv"	,"ky"	,"sill"	,"and"	,"ru"	,"sph"	,"wo"	,"pswo"	,"ne"	,"O2"  ,"H2O"				},//!!!!!!have to check pure endmerber for ultramafic comp
-	{"fluid", "ol"  ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"		},
+	{"fluid", "ol"  ,"br"	,"ch"	,"atg"	,"g"	,"ta"	,"chl"	,"anth"	,"spi"	,"opx"	,"po"	,"aphs"	,"fluidb"  ,"occm" },
 	
-	{1		,1		,1		,1		,1		,1		,1		,1		,1 		,1 		,1 		,1 		},  // allow solvus?
-	{11  	,10  	,10 	,10 	,489 	,10  	,985 	,2425	,3136	,100	,196	,10		},  // No. of pseudocompound
-	{0.001	,0.1	,0.1	,0.1	,0.19	,0.1	,0.19	,0.249	,0.249	,0.1	,0.19	,0.1	},  // discretization step
+	{1		,1		,1		,1		,1		,1		,1		,1		,1 		,1 		,1 		,1 		,1 		,1 		,1},  // allow solvus?
+	{21  	,21  	,21 	,21 	,465 	,21  	,912 	,2425	,3136	,441	,935	,21		,21	    ,21 	,160},  // No. of pseudocompound
+	{0.00049,0.049	,0.049	,0.049	,0.198	,0.049	,0.198	,0.249	,0.249	,0.049	,0.124	,0.049	,0.049	,0.049	,0.198},  // discretization step
 
 	2.0, 						/* max dG under which a phase is considered to be reintroduced  					*/
 	473.15,						/* max temperature above which PGE solver is active 								*/
